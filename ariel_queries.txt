@@ -1,0 +1,5 @@
+select logsourceid, count(*), LogSourceName(logSourceId) from events group by logsourceid
+
+select logsourceid, count(*) as 'count', LogSourceName(logSourceId) from events group by logsourceid order by 'count' desc
+
+select * from events where logsourceid = '<logsourceid>'  LIMIT 100  LAST 1 MINUTES

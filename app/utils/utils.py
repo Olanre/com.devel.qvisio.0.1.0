@@ -1,17 +1,19 @@
 def parseResponse(header):
    return {
         '200': 1,
-        '500': 2,
-        '404': 3,
-        '422': 4
+        '201': 2,
+        '500': 3,
+        '404': 4,
+        '422': 5
     }[header]
 
 def matchResponseType(code):
     return {
-        1: "Success",
-        2: "Server Error",
-        3: "Resource not found",
-        4: "Invalid Query",
+        1: "Get Success",
+        2: "POST Success",
+        3: "Server Error",
+        4: "Resource not found",
+        5: "Invalid Query",
     }[code]
     
 def logSourceEndPoints(url):

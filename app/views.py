@@ -21,15 +21,4 @@ def restData():
         raise
     return render_template("index.html", title = "QRadar All-in-One Visualizer", error="Unable to connect to QRadar")
     
-@app.route('/getLogSources', methods=['GET'])
-def restLogSources():
-    try:
-        headers = {'content-type' : 'text/plain'}
-        log_source = qpylib.REST( 'get', utils.logSourceEndPoints('log_source'), headers = headers )
-        log_sources_list = log_source.json() # List containing dictionary objects for each QRadar offense
 
-    except Exception as e:
-        qpylib.log( "Error "  + str(e) )
-        raise
-
-    
