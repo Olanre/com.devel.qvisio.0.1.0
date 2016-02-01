@@ -2,4 +2,342 @@ select logsourceid, count(*), LogSourceName(logSourceId) from events group by lo
 
 select logsourceid, count(*) as 'count', LogSourceName(logSourceId) from events group by logsourceid order by 'count' desc
 
-select * from events where logsourceid = '<logsourceid>'  LIMIT 100  LAST 1 MINUTES
+select * from events where logsourceid = '<logsourceid>'  LIMIT 100  LAST <x> MINUTES
+
+Where x in [1-60]
+
+select logsourceid, count(*) as 'count', LogSourceName(logSourceId) from events group by logsourceid order by 'count' desc LAST 60 MINUTES
+select logsourceid, count(*) as 'count', LogSourceName(logSourceId) as 'logsourcename' from events group by logsourceid order by 'count' desc LIMIT 100 LAST 60 MINUTES
+
+da6b5026-0f57-4833-ad50-f0d6df4a8dc4
+
+select logsourceid, count(*) as 'count', LogSourceName(logSourceId) from events group by logsourceid order by 'count' desc LAST 25 hours
+
+
+
+563, 262, 562, 212, 713, 712, 512, 163, 312, 162, 165, 164
+
+[
+  {
+    "credibility": 5,
+    "enabled": true,
+    "status": null,
+    "modified_date": 1447252940098,
+    "deployed": true,
+    "type": 41,
+    "target_event_collector": {
+      "id": 7,
+      "name": "eventcollector0 :: csd32"
+    },
+    "deleted": false,
+    "creation_date": 1447252940098,
+    "last_event_time": 1447253123265,
+    "id": 165,
+    "auto_discovered": true,
+    "bulk_added": false,
+    "protocol_config": {
+      "0": "Syslog",
+      "PORT": "514"
+    },
+    "description": "ASA device",
+    "bulk_added_id": 0,
+    "name": "ASA @ 127.0.0.1",
+    "encoding": "UTF-8",
+    "store_event_payload": true,
+    "language": {
+      "id": 1,
+      "name": "English"
+    },
+    "coalesce_events": true,
+    "identifier": "127.0.0.1",
+    "groups": [
+      0
+    ],
+    "parsing_order": 3,
+    "log_only": false
+  },
+  {
+    "credibility": 5,
+    "enabled": true,
+    "status": null,
+    "modified_date": 1450297435198,
+    "deployed": true,
+    "type": 41,
+    "target_event_collector": {
+      "id": 7,
+      "name": "eventcollector0 :: csd32"
+    },
+    "deleted": false,
+    "creation_date": 1450297435198,
+    "last_event_time": 1450298417585,
+    "id": 462,
+    "auto_discovered": true,
+    "bulk_added": false,
+    "protocol_config": {
+      "0": "Syslog",
+      "PORT": "514"
+    },
+    "description": "ASA device",
+    "bulk_added_id": 0,
+    "name": "ASA @ 9.21.123.139",
+    "encoding": "UTF-8",
+    "store_event_payload": true,
+    "language": {
+      "id": 1,
+      "name": "English"
+    },
+    "coalesce_events": true,
+    "identifier": "9.21.123.139",
+    "groups": [
+      100131
+    ],
+    "parsing_order": 1,
+    "log_only": false
+  },
+  {
+    "credibility": 5,
+    "enabled": true,
+    "status": null,
+    "modified_date": 1453224697398,
+    "deployed": true,
+    "type": 41,
+    "target_event_collector": {
+      "id": 7,
+      "name": "eventcollector0 :: csd32"
+    },
+    "deleted": false,
+    "creation_date": 1453224403458,
+    "last_event_time": 1453482011785,
+    "id": 662,
+    "auto_discovered": true,
+    "bulk_added": false,
+    "protocol_config": {
+      "0": "Syslog",
+      "PORT": "514"
+    },
+    "description": "TestingSensorDeviceSave",
+    "bulk_added_id": 0,
+    "name": "ASA @ 9.6.96.167",
+    "encoding": "UTF-8",
+    "store_event_payload": true,
+    "language": {
+      "id": 1,
+      "name": "English"
+    },
+    "coalesce_events": false,
+    "identifier": "9.6.96.167",
+    "groups": [
+      0
+    ],
+    "parsing_order": 1,
+    "log_only": false
+  },
+  {
+    "credibility": 5,
+    "enabled": true,
+    "status": null,
+    "modified_date": 1450297784631,
+    "deployed": true,
+    "type": 41,
+    "target_event_collector": {
+      "id": 7,
+      "name": "eventcollector0 :: csd32"
+    },
+    "deleted": false,
+    "creation_date": 1450297784631,
+    "last_event_time": 1450298417316,
+    "id": 467,
+    "auto_discovered": true,
+    "bulk_added": false,
+    "protocol_config": {
+      "0": "Syslog",
+      "PORT": "514"
+    },
+    "description": "ASA device",
+    "bulk_added_id": 0,
+    "name": "ASA @ cisco.asa.test.com",
+    "encoding": "UTF-8",
+    "store_event_payload": true,
+    "language": {
+      "id": 1,
+      "name": "English"
+    },
+    "coalesce_events": true,
+    "identifier": "cisco.asa.test.com",
+    "groups": [
+      0
+    ],
+    "parsing_order": 1,
+    "log_only": false
+  },
+  {
+    "credibility": 5,
+    "enabled": true,
+    "status": null,
+    "modified_date": 1453404813066,
+    "deployed": true,
+    "type": 391,
+    "target_event_collector": {
+      "id": 7,
+      "name": "eventcollector0 :: csd32"
+    },
+    "deleted": false,
+    "creation_date": 1453404813066,
+    "last_event_time": 1453404962143,
+    "id": 664,
+    "auto_discovered": false,
+    "bulk_added": false,
+    "protocol_config": {
+      "0": "Syslog",
+      "PORT": "514"
+    },
+    "description": "test aruba",
+    "bulk_added_id": 0,
+    "name": "Aruba gusta",
+    "encoding": "UTF-8",
+    "store_event_payload": true,
+    "language": {
+      "id": 1,
+      "name": "English"
+    },
+    "coalesce_events": true,
+    "identifier": "192.168.0.192",
+    "groups": [
+      0
+    ],
+    "parsing_order": 1,
+    "log_only": false
+  },
+  {
+    "credibility": 5,
+    "enabled": true,
+    "status": null,
+    "modified_date": 1452694733617,
+    "deployed": true,
+    "type": 185,
+    "target_event_collector": {
+      "id": 7,
+      "name": "eventcollector0 :: csd32"
+    },
+    "deleted": false,
+    "creation_date": 1452694733617,
+    "last_event_time": 1452694743852,
+    "id": 613,
+    "auto_discovered": true,
+    "bulk_added": false,
+    "protocol_config": {
+      "0": "Syslog",
+      "PORT": "514"
+    },
+    "description": "Bind device",
+    "bulk_added_id": 0,
+    "name": "Bind @ aplinf031.torontohydro.com",
+    "encoding": "UTF-8",
+    "store_event_payload": true,
+    "language": {
+      "id": 1,
+      "name": "English"
+    }
+	"coalesce_events": true,
+    "identifier": "aplinf031.torontohydro.com",
+    "groups": [
+      0
+    ],
+    "parsing_order": 1,
+    "log_only": false
+  }
+  
+						Log source group
+  
+  
+  {
+    "id": 100131,
+    "parent_id": 1,
+    "level_id": 2,
+    "description": "",
+    "log_sources": [
+      463,
+      462,
+      469,
+      464
+    ],
+    "name": "test",
+    "owner": "admin",
+    "child_groups": [],
+    "modified": 1450297537420
+  },
+  {
+    "id": 1,
+    "parent_id": null,
+    "level_id": 1,
+    "description": "Sensor device grouping root node",
+    "log_sources": [],
+    "name": "sensor device",
+    "owner": "admin",
+    "child_groups": [
+      100131
+    ],
+    "modified": 1432748467368
+  },
+  {
+    "id": 0,
+    "parent_id": 1,
+    "level_id": 2,
+    "description": null,
+    "log_sources": [
+      68,
+      69,
+      70,
+      614,
+      64,
+      615,
+      65,
+      612,
+      412,
+      66,
+      613,
+      67,
+      618,
+      619,
+      616,
+      468,
+      617,
+      466,
+      467,
+      465,
+      563,
+      262,
+      562,
+      212,
+      713,
+      712,
+      512,
+      163,
+      312,
+      162,
+      165,
+      164,
+      119,
+      118,
+      117,
+      116,
+      664,
+      115,
+      665,
+      114,
+      666,
+      113,
+      112,
+      662,
+      663,
+      63,
+      62,
+      362,
+      363,
+      120
+    ],
+    "name": "Other",
+    "owner": "admin",
+    "child_groups": null,
+    "modified": null
+  }

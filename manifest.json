@@ -1,1 +1,15 @@
-{"version": "1.0", "name": "QVisio", "dev_opts": [{"console_ip": "9.180.225.32"}], "description": "Application to visual several components of QRadar", "uuid": "b832d28c-68ea-4f56-80ec-11fd3749fdd8", "areas": [{"url": "index", "text": "QVisio", "required_capabilities": ["ADMIN"], "id": "QHelloWorld", "description": "A Hello World app"}]}
+{
+"version": "1.0",
+ "name": "QVisio",
+ "description": "Application to visual several components of QRadar",
+  "uuid": "b832d28c-68ea-4f56-80ec-11fd3749fdd8", 
+  "areas": [
+  		{
+  			"url": "loadSystem", 
+  			"text": "QVisio", 
+  			"required_capabilities": ["ADMIN"],
+  			 "id": "QHelloWorld", 
+  			 "description": "A Hello World app"
+  		}
+  	]
+}
