@@ -52,9 +52,9 @@
 			 	var processed = 0;
 	
 			 	//on page start
-			 	initVisio('LAST 1 MINUTES', (function () {
+			 	initVisio('LAST 60 MINUTES', function () {
 			 	    clearLoader();
-			 	}));
+			 	});
 		   }
 		   function clearLoader () {
 		 	    console.log("Finished loading model");

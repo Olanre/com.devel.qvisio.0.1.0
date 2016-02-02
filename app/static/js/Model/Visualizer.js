@@ -21,6 +21,7 @@ function generateEventCollectorJson( pre_flare){
 			
 			
 		}
+		console.log(flare);
 		return flare;
 	}
 	
@@ -45,6 +46,7 @@ function generateLogSourceTypeJSON( pre_flare){
 			collection = {"name" : name, "id" : id, "children" : logsources};
 			flare.children.push(collection);
 		}
+		console.log(flare);
 		return flare;
 	}
 
@@ -68,6 +70,7 @@ function generateLogSourceGroupJSON( pre_flare){
 		        flare.children.push(item);
 		    }
 		});
+		console.log(flare);
 		return flare;
 	}
 
@@ -97,14 +100,14 @@ function initVisio(filter, callback){
 	      
 	    } else if( processed == 70) {
 	    	processed = 71;
-	    	var types_string = defaultStorage["LogSourceTypes"].join();
+	    	var types_string = Object.keys(defaultStorage["LogSourceTypes"]).join();
 	    	if(types_string !== null){
 	    		 filter = "?filter=id in (" + types_string + ")";
 	    		getDeviceTypes(filter, 100);
 	    	}
 	    }else if( processed == 80){
 	    	processed = 81;
-	    	var groups_string = defaultStorage["LogSourceGroups"].join();
+	    	var groups_string = Object.keys(defaultStorage["LogSourceGroups"]).join();
 	    	if(groups_string !== null){
 	    		 filter = "?filter=id in (" + groups_string + ")";
 	    		getDeviceGroups(filter, 200);
@@ -116,9 +119,9 @@ function initVisio(filter, callback){
 	    	Type_flare= generateLogSourceTypeJSON( defaultStorage["LogSourceTypes"]);
 	    	Group_flare= generateLogSourceTypeJSON( defaultStorage["LogSourceGroups"]);
 	    	processed = 100;
-	    	//done
+	    	console.log("Done building the model");
 	    	clearInterval(id);
-	    	callback;
+	    	callback();
 	    	return;
 	    }
 	  }

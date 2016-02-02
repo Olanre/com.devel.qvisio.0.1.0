@@ -16,6 +16,7 @@ function sendAPIRequest(url, type,  callback, limit){
         xhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
 	xhttp.onreadystatechange = function() {
+		console.log(xhttp.status);
 		  if (xhttp.readyState == 4 && xhttp.status == 200 || xhttp.readyState == 4 && xhttp.status == 201) {
 			  callback(JSON.parse(xhttp.responseText), url);
 		  }else{
