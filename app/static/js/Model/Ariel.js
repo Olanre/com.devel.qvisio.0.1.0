@@ -28,23 +28,21 @@ function processArielTransitSearch(response, url){
 		}else{
 			//handle errors here
 			alert("Could not contact API query server, please try again later");
+			ErrorHandler('409');
 		}
 	}
 	else{
 		console.log("endPoint recieved was null");
+		ErrorHandler('400');
 	}
 }
 
 function processArielResult(response, url){
-	if(response !== null){
+	if(response !== null && Object.keys(response).length > 0){
 		console.log( "Log Source Ariel Search returned the list: " + response.events);
 		insertEventSearchData( response.events );
+	}else{
+		console.log("Server Response recieved was null");
+		ErrorHandler('409');
 	}
-}
-
-function pollAriel(endPoint, type, progress){
-	//when we have gotten all the log sources from the ariel search
-	sendAPIRequest(endPoint, type, processArielTransitSearch);
-	processed = progress/2;	
-	
 }

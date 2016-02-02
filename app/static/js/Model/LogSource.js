@@ -8,41 +8,42 @@
  */
 function getAllDevices(filter, limit){
 	var type = 'get';
-	//var log_source_string = eventStorage["LogSources"].toString();
-	//var filter = "?filter=id%20in%20(" + log_source_string + ")";
 	var endPoint = logSourceGetEndpoints('log_sources', filter );
 	
 	console.log(endPoint);
-	if(endPoint !== null){
+	if(endPoint !== null && endPoint !== undefined){
 		sendAPIRequest(endPoint, type, processLogSources, limit );
 	}
 	else{
+		ErrorHandler('400');
 		console.log("endPoint recieved was null");
 	}
 }
 
-function getDeviceTypes(limit){
+function getDeviceTypes(filter, limit){
 	var type = 'get';
-	var endPoint = logSourceGetEndpoints('log_sources_types');
+	var endPoint = logSourceGetEndpoints('log_source_types', filter);
 	
 	console.log(endPoint);
-	if(endPoint !== null){
+	if(endPoint !== null && endPoint !== undefined){
 		sendAPIRequest(endPoint, type, processLogSourceTypes, limit);
 	}
 	else{
+		ErrorHandler('400');
 		console.log("endPoint recieved was null");
 	}
 }
 
-function getDeviceGroups(limit){
+function getDeviceGroups(filter, limit){
 	var type = 'get';
-	var endPoint = logSourceGetEndpoints('log_sources_groups');
+	var endPoint = logSourceGetEndpoints('log_sources_groups',  filter);
 	
 	console.log(endPoint);
-	if(endPoint !== null){
+	if(endPoint !== null && endPoint !== undefined){
 		sendAPIRequest(endPoint, type, processLogSourceGroups, limit);
 	}
 	else{
+		ErrorHandler('400');
 		console.log("endPoint recieved was null");
 	}
 }
@@ -50,37 +51,53 @@ function getDeviceGroups(limit){
 function getLogSource_by_Query(filter, where){
 	where =  where || '';
 	var query = "select logsourceid, count(*) as 'count', LogSourceName(logSourceId) as 'logsourcename' from events" + where +
-	" group by logsourceid order by 'count' desc LIMIT 100" + filter;
+	" group by logsourceid order by 'count' desc LIMIT 100 " + filter;
 	var endPoint = ArielPostEndpoints('search')+query;
 	var type = 'post';
 	
 	console.log(endPoint);
 	if(endPoint != null){
 		sendAPIRequest(endPoint, type,  processArielTransitSearch );
+	}else{
+		ErrorHandler('400');
+		console.log("endPoint recieved was null");
 	}
 
 }
 
 function processLogSources( response, url){
-	if(response !== null){
+	
+	if(response !== null && response.length > 0 ){
 		console.log( "Log Source API returned the list: ");
+		console.log(response);
 		insertLogSourceData( response );
+	}else{
+		console.log("Server Response recieved was null");
+		ErrorHandler('500');
 	}
 	
 }
 
 function processLogSourceGroups( response, url){
-	if(response !== null){
+	if(response !== null && response.length > 0 ){
 		console.log( "Log Source Groups API returned the list: ");
+		console.log(response);
 		insertLogSourceGroupData( response );
+	}else{
+		console.log("Server Response recieved was null");
+		ErrorHandler('409');
 	}
 	
 }
 
 function processLogSourceTypes( response, url){
-	if(response !== null){
+	if(response !== null && response.length > 0){
 		console.log( "Log Source Groups API returned the list: ");
+		console.log(response);
 		insertLogSourceTypeData( response );
+	}else{
+		console.log("Server Response recieved was null");
+		ErrorHandler('409');
 	}
 	
 }

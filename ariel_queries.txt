@@ -341,3 +341,227 @@ select logsourceid, count(*) as 'count', LogSourceName(logSourceId) from events 
     "child_groups": null,
     "modified": null
   }
+  
+  
+						Log Source Type
+						[
+  {
+    "extension": null,
+    "credibility": 8,
+    "id": 106,
+    "uniquePerHost": false,
+    "defaultLanguageId": 1,
+    "description": null,
+    "protocols": [
+      {
+        "id": 22,
+        "description": "TLS Syslog",
+        "name": "TLSSyslog"
+      },
+      {
+        "id": 0,
+        "description": "Syslog",
+        "name": "Syslog"
+      }
+    ],
+    "name": "Threecom8800SeriesSwitch",
+    "mask": 0,
+    "dsmParameter": "",
+    "deviceCategory": 1
+  },
+  {
+    "extension": null,
+    "credibility": 8,
+    "id": 272,
+    "uniquePerHost": false,
+    "defaultLanguageId": 1,
+    "description": null,
+    "protocols": [
+      {
+        "id": 22,
+        "description": "TLS Syslog",
+        "name": "TLSSyslog"
+      },
+      {
+        "id": 0,
+        "description": "Syslog",
+        "name": "Syslog"
+      }
+    ],
+    "name": "APCUninterruptiblePowerSupply",
+    "mask": 0,
+    "dsmParameter": "",
+    "deviceCategory": 1
+  },
+  {
+    "extension": null,
+    "credibility": 8,
+    "id": 363,
+    "uniquePerHost": false,
+    "defaultLanguageId": 1,
+    "description": null,
+    "protocols": [
+      {
+        "id": 15,
+        "description": "Log File",
+        "name": "LogFileProtocol"
+      }
+    ],
+    "name": "AccessDataInSight",
+    "mask": 0,
+    "dsmParameter": "",
+    "deviceCategory": 1
+  },
+  {
+    "extension": null,
+    "credibility": 8,
+    "id": 353,
+    "uniquePerHost": false,
+    "defaultLanguageId": 1,
+    "description": null,
+    "protocols": [
+      {
+        "id": 55,
+        "description": "AhnLabPolicyCenterJdbc",
+        "name": "AhnLabPolicyCenterJdbc"
+      }
+    ],
+    "name": "AhnLabPolicyCenter",
+    "mask": 0,
+    "dsmParameter": "",
+    "deviceCategory": 5
+  },
+  {
+    "extension": null,
+    "credibility": 8,
+    "id": 321,
+    "uniquePerHost": false,
+    "defaultLanguageId": 1,
+    "description": null,
+    "protocols": [
+      {
+        "id": 51,
+        "description": "HTTP Receiver",
+        "name": "HTTPReceiver"
+      }
+    ],
+    "name": "AkamaiKona",
+    "mask": 0,
+    "dsmParameter": "",
+    "deviceCategory": 1
+  },
+  {
+    "extension": null,
+    "credibility": 8,
+    "id": 347,
+    "uniquePerHost": false,
+    "defaultLanguageId": 1,
+    "description": null,
+    "protocols": [
+      {
+        "id": 15,
+        "description": "Log File",
+        "name": "LogFileProtocol"
+      },
+      {
+        "id": 62,
+        "description": "Amazon AWS S3 REST API",
+        "name": "AmazonAWSRESTAPI"
+      }
+    ],
+    "name": "AmazonAWSCloudTrail",
+    "mask": 0,
+    "dsmParameter": "",
+    "deviceCategory": 3
+  },
+  {
+    "extension": null,
+    "credibility": 8,
+    "id": 47,
+    "uniquePerHost": false,
+    "defaultLanguageId": 1,
+    "description": null,
+    "protocols": [
+      {
+        "id": 0,
+        "description": "Syslog",
+        "name": "Syslog"
+      },
+      {
+        "id": 22,
+        "description": "TLS Syslog",
+        "name": "TLSSyslog"
+      }
+    ],
+    "name": "IpAngel",
+    "mask": 0,
+    "dsmParameter": "",
+    "deviceCategory": 1
+  },
+  {
+    "extension": null,
+    "credibility": 8,
+    "id": 207,
+    "uniquePerHost": false,
+    "defaultLanguageId": 1,
+    "description": "Anomaly Detection Engine",
+    "protocols": [
+      {
+        "id": 33,
+        "description": null,
+        "name": "AnomalyDetectionEngine"
+      }
+    ],
+    "name": "AnomalyDetectionEngine",
+    "mask": 0,
+    "dsmParameter": "",
+    "deviceCategory": 4
+  },
+  {
+    "extension": null,
+    "credibility": 7,
+    "id": 10,
+    "uniquePerHost": false,
+    "defaultLanguageId": 1,
+    "description": null,
+    "protocols": [
+      {
+        "id": 22,
+        "description": "TLS Syslog",
+        "name": "TLSSyslog"
+      },
+      {
+        "id": 0,
+        "description": "Syslog",
+        "name": "Syslog"
+      }
+    ],
+    "name": "Apache",
+    "mask": 0,
+    "dsmParameter": "",
+    "deviceCategory": 3
+  },
+  {
+    "extension": null,
+    "credibility": 8,
+    "id": 280,
+    "uniquePerHost": false,
+    "defaultLanguageId": 1,
+    "description": null,
+    "protocols": [
+      {
+        "id": 22,
+        "description": "TLS Syslog",
+        "name": "TLSSyslog"
+      },
+      {
+        "id": 0,
+        "description": "Syslog",
+        "name": "Syslog"
+      }
+    ],
+    "name": "AppSecDbProtect",
+    "mask": 0,
+    "dsmParameter": "",
+    "deviceCategory": 5
+  },

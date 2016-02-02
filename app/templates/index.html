@@ -41,7 +41,9 @@
 		<link  href="static/css/nv.d3.css" rel="stylesheet">
 		
 		<script type='text/javascript'>
-			var console_ip
+			var console_ip;
+			//global Error variable
+			var Error;
 		   function loadApp(){
 				//declare console ip
 				var value = getValueById('console_ip');
@@ -50,7 +52,7 @@
 			 	var processed = 0;
 	
 			 	//on page start
-			 	initVisio(100, (function () {
+			 	initVisio('LAST 1 MINUTES', (function () {
 			 	    clearLoader();
 			 	}));
 		   }

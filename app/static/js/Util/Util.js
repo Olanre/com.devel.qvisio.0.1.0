@@ -6,6 +6,7 @@
 function sendAPIRequest(url, type,  callback, limit){
 	limit = limit || 0;
 	var xhttp;
+	url = encodeURI(url);
 	var sessionCookie = getCookie("QRadarCSRF");
     if (window.XMLHttpRequest) {
         // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -23,11 +24,14 @@ function sendAPIRequest(url, type,  callback, limit){
 		
 		};
 		xhttp.open(type, url, true);
-		xhttp.setRequestHeader('Accept', "application/json");;
+		xhttp.setRequestHeader('Accept', "application/json");
+		xhttp.setRequestHeader('Allow-Hidden', 'true')
 		xhttp.setRequestHeader('QRadarCSRF',sessionCookie);
+		
 		if( limit !== 0){
-			var range = "items=1-" + limit;
-			xhttp.setRequestHeader('Range', limit);
+			var range = "items=0-" + limit;
+			console.log("Setting limit to be" + limit);
+			xhttp.setRequestHeader('Range', range);
 		}
 		
 		xhttp.setRequestHeader('Version', '5.1');
@@ -39,15 +43,27 @@ function ErrorHandler(code){
 	var cases = {};
 	cases['500'] = function() {
 		  //render body template for Server Error
+		Error = "An internal Server Error";
 	};
 	cases['404'] = function() {
 		//render body template for 404 Page not found
+		Error= "Resource not Found: 404";
 	};
 	cases['422'] = function() {
 		//render body template for Invalid Query to the API
+		Error="Invalid Query to the API";
 	};
 	cases['409'] = function() {
 		//render body template for API could not handle the request - will be ignored
+		Error="The API could not handle the request";
+	};
+	cases['400'] = function() {
+		//render body template for API could not handle the request - will be ignored
+		Error="Oops, we messed up. please try accessing the App at a later time";
+	};
+	cases['403'] = function() {
+		//render body template for API could not handle the request - will be ignored
+		Error="Cannot access resource on the server - Forbiddened";
 	};
 	
 	if(typeof cases[code] == 'function') {
@@ -59,11 +75,11 @@ function ErrorHandler(code){
 }
 
 function logSourceGetEndpoints(type, filter){
-	filter = filter || ''
-	var endPoints = {'log_sources': '/api/configuration/log_sources?' + filter ,
-					'log_source_types': '/api/configuration/log_source_types',
+	filter = filter || '';
+	var endPoints = {'log_sources': '/api/configuration/log_sources' + filter ,
+					'log_source_types': '/api/configuration/log_source_types' + filter,
 					'log_source_protocols': '/api/configuration/log_source_protocols',
-					'log_source_groups': '/api/config/log_source_groups'};
+					'log_source_groups': '/api/config/log_source_groups' + filter};
 	if(endPoints[type] !== null){
 		return console_ip + endPoints[type];
 	}else{
@@ -94,6 +110,10 @@ function ArielPostEndpoints(type){
 		return null;
 	}
 
+}
+
+function checkFilter( filter, type){
+	
 }
 
 function getValueById(id){
