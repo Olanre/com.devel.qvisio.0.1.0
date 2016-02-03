@@ -6,7 +6,7 @@ var Error;
 
 
 function fillGauge(id, value){
-	vvar config1 = liquidFillGaugeDefaultSettings();
+	var config1 = liquidFillGaugeDefaultSettings();
     config1.circleThickness = 0.2;
     config1.textVertPosition = 0.2;
     config1.waveAnimateTime = 1000;
