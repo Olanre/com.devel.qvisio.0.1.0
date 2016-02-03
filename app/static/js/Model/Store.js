@@ -10,11 +10,14 @@ function insertEventSearchData( events ){
 	var currentdate = getDateTime();
 	var logsourcename;
 	var entry;
+	var time;
 	//up to 100 elements will be processed
 	for(var i =0; i<events.length; i++){
 		logsourceid = events[i]["logsourceid"];
-		logsourceid = events[i]["logsourceid"];
 		logsourcename = events[i]["logsourcename"];
+		time = 60*time_in_minutes;
+		count = events[i]["count"]/time;
+		
 		entry = {'rate': count, 'time':  currentdate, 'name': logsourcename};
 		//store the values in our local store variable, logsourceids in an array and the event rate as a mapping
 		eventStorage["LogSources"].push(logsourceid);
@@ -29,6 +32,7 @@ function insertEventSearchData( events ){
 		
 	}
 	console.log(eventStorage["LogSources"]);
+	console.log(eventStorage["event_rate"]);
 	processed = 60;
 }
 
@@ -98,8 +102,11 @@ function insertLogSourceData( items ){
 			
 		}
 		processed = 70;
+		console.log("Log Source default storage is ");
 		console.log(defaultStorage["LogSources"]);
+		console.log("Log Groups default storage is ");
 		console.log(defaultStorage["LogSourceGroups"]);
+		console.log("Log Types default storage is " );
 		console.log(defaultStorage["LogSourceTypes"]);
 	
 }
@@ -111,7 +118,6 @@ function insertLogSourceGroupData( items){
 	var new_logs;
 	var groups;
 
-	processed = 75;
 	for(var i =0; i<items.length; i++){
 		id = items[i]["id"];
 		if(defaultStorage["LogSourceGroups"][id] !== null){
@@ -123,14 +129,14 @@ function insertLogSourceGroupData( items){
 		
 	}
 	
-	processed = 80;
+	processed = 90;
+	console.log(" Post Filtered Log Groups default storage is now ");
 	console.log(defaultStorage["LogSourceGroups"]);
 }
 
 function insertLogSourceTypeData( items){
 	var id;
 	var log_sources;
-	processed = 85;
 	for(var i =0; i<items.length; i++){
 		id = items[i]["id"];
 		if(defaultStorage["LogSourceTypes"][id] !== null){
@@ -139,7 +145,8 @@ function insertLogSourceTypeData( items){
 			defaultStorage["LogSourceTypes"][id]['log_sources'] = log_sources;
 		}
 	}
-	processed = 90;
+	processed = 80;
+	console.log(" Post Filtered Log Types default storage is now ");
 	console.log(defaultStorage["LogSourceTypes"]);
 }
 

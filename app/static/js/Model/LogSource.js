@@ -37,7 +37,7 @@ function getDeviceTypes(filter, limit){
 
 function getDeviceGroups(filter, limit){
 	var type = 'get';
-	var endPoint = logSourceGetEndpoints('log_sources_groups',  filter);
+	var endPoint = logSourceGetEndpoints('log_source_groups',  filter);
 	
 	console.log(endPoint);
 	if(endPoint !== null && endPoint !== undefined){

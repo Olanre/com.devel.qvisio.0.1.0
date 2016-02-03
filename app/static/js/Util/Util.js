@@ -71,6 +71,7 @@ function ErrorHandler(code){
 		  // only executes if we've defined it above
 		  cases[code]();  //execute the body of the code map
 		} else {
+			//Error="An Unknown Error occured";
 		  // default (the fallthrough) if we really don't understand what the server sent us
 	}
 }
@@ -113,9 +114,6 @@ function ArielPostEndpoints(type){
 
 }
 
-function checkFilter( filter, type){
-	
-}
 
 function getValueById(id){
 	var element = document.getElementById(id);

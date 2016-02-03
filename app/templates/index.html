@@ -71,6 +71,7 @@
 				<section> 
 				</section>
 				<div id = "content"> </div>
+				<div id = "visio"> </div>
 				
 				</div>  
 				
@@ -82,13 +83,13 @@
 <script type = "Sidebar" id = "template5">	
 	<div class="sidebar">				
 		<ul class="nav nav-sidebar">						
-			<li id='nav-option-group' onclick = "LogSourceGroupView()">						
+			<li id='nav-option-group' onclick = "RenderView('nav-option-group')">						
 				<a href="#"> Log Source Group</a>						
 			</li>						
-			<li id='nav-option-collector' onclick = "EventCollectorView()">						
+			<li id='nav-option-collector' onclick = "RenderView('nav-option-collector')">						
 				<a href="#">Event Collectors</a>						
 			</li>			
-			<li id='nav-option-type' onclick = "LogSourceTypeView()">						
+			<li id='nav-option-type' onclick = "RenderView('nav-option-type')">						
 				<a href="#">Log Source Type</a>						
 			</li>	
 		</ul>					
@@ -97,6 +98,7 @@
 
 <script type = 'ApplicationView' ID ='template6'>
 		<nav class="navbar navbar-inverse navbar-fixed-top">
+			Event Collection Viqualization - Last {{x}} minutes
 		</nav>
 </script>
 </html>

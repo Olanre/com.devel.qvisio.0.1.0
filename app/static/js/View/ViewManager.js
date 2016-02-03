@@ -2,7 +2,90 @@ var console_ip;
 //global Error variable
 var Error;
 
+var EC_flare;
+var Type_flare;
+var Group_flare;
 
+var time_in_minutes = 60;
+
+function generateEventCollectorJson( pre_flare){
+	var flare = { "name": "flare", "children" : [] };
+	var keys = Object.keys(pre_flare);
+	var key, name, id, logsources;
+	var collection;
+	if(pre_flare.length < 1){
+		ErrorHandler('400');
+		console.log("Event Collector JSON recieved is empty");
+		
+	}else{
+		for(var i = 0 ; i<keys.length; i++){
+			key = keys[i];
+			id = pre_flare[key].id;
+			logsources = pre_flare[key].log_sources;
+			collection = {"name" : key, "id" : id, "children" : logsources};
+			flare.children.push(collection);
+			
+			
+		}
+		console.log("Event collector flare is ");
+		console.log(flare);
+		return flare;
+	}
+	
+}
+
+function generateLogSourceTypeJSON( pre_flare){
+	var flare = { "name": "flare", "children" : [] };
+	var keys = Object.keys(pre_flare);
+	var key, name, id, logsources;
+	var collection;
+	console.log(keys);
+	if(pre_flare.length < 1){
+		ErrorHandler('400');
+		console.log("Log source type JSON recieved is empty");
+		
+	}else{
+		for(var i = 0 ; i<keys.length; i++){
+			key = keys[i];
+			
+			id = pre_flare[key]
+			name = pre_flare[key].name;
+			logsources = pre_flare[key].log_sources;
+			collection = {"name" : name, "id" : id, "children" : logsources};
+			flare.children.push(collection);
+		}
+		console.log(" Log Source type flare is ");
+		console.log(flare);
+		return flare;
+	}
+
+
+}
+
+//http://stackoverflow.com/questions/15713878/create-javascript-tree-out-of-list-of-objects
+function generateLogSourceGroupJSON( pre_flare){
+	var flare = { "name": "flare", "children" : [] };	
+	
+	var keys = Object.keys(pre_flare);
+	var key, name, id, logsources;
+	var collection;
+	console.log(keys);
+	if(pre_flare.length < 1){
+		ErrorHandler('400');
+		console.log("Log source group JSON recieved is empty");	
+	}else{
+		pre_flare.forEach(function(item) {
+		    if(item.parent_id !== null) {
+		    	collection = {"name" : item.name, "id" : item.id, "children" : item.logsources};
+		        flare.children.push(item);
+		    }
+		});
+		console.log( " Log source group flare is ");
+		console.log(flare);
+		return flare;
+	}
+
+}
 
 
 function fillGauge(id, value){
@@ -22,7 +105,7 @@ function loadApp(){
  	var processed = 0;
 
  	//on page start
- 	initVisio('LAST 60 MINUTES', function () {
+ 	initVisio('LAST' + time_in_minutes + ' MINUTES', function () {
  	    clearLoader();
  	    defaultsideBarView();
  	    defaultheaderView();
@@ -50,3 +133,28 @@ function defaultheaderView(){
 	var head= getHeader();
 	head.innerHTML = header.innerHTML;
 }
+
+function RenderView(id){
+	removeClass('active');
+	var flare;
+	document.getElementById(id).className='active';
+	
+	switch(id) {
+    case 'nav-option-group':
+        flare = Group_flare;
+        break;
+    case 'nav-option-collector':
+        flare = EC_flare;
+        break;
+    case 'nav-option-type':
+    	flare = Type_flare;
+    	break;
+    default:
+        default ErrorHandler('400');
+	}
+		
+	loadVisioView(flare, 'visio');
+}
+
+
+
