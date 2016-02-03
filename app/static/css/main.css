@@ -6,7 +6,7 @@ body{
 	font-family: 'Helvetica','Veranda';
 	border-radius:50px;
   margin:0px;
-  background-color:#504646;
+  background-color:#FAFCFE;
 }
 
 iframe{
@@ -81,7 +81,7 @@ code{
 	padding-top:10%;
 	overflow-x: hidden;
 	overflow-y: auto;
-	background-color: #64c6ad;
+	background-color: #008ABF;
 	width: 253px;
 }
 
@@ -257,53 +257,6 @@ Register for simulation page
   text-align:center;
 }
 
-/*--------------------------------
-Upload Apps RDTs and Test Scripts
----------------------------------*/
-.uploadButton{
-  color:white;
-  text-align:center;
-  font-size:30px;
-  padding: 4px 4px 4px 4px;
-  border-radius:25px;
-  width: 350px;
-  height: 100px;
-  background-color: #55A5DD;
-}
-
-#uploadTest{
-  width:0px;
-  height:0px;
-  visibility:hidden;
-}
-
-#uploadRDT{
-  width:0px;
-  height:0px;
-  visibility:hidden;
-}
-
-#uploadApp{
-  width:0px;
-  height:0px;
-  visibility:hidden;
-}
-
-.uploadContainer{
-  padding:50px;
-}
-
-.upload-file-cover{
-  color:white;
-}
-
-#uploadFiles{
-  padding:10px;
-}
-
-.require-table{
-  margin:5px;
-}
 
 /*-----------------------
  *viewing list of networks which you can join and leave

@@ -166,3 +166,74 @@ function intersect_safe(a, b)
 
   return result;
 }
+
+function getDateTime() {
+    var now     = new Date(); 
+    var year    = now.getFullYear();
+    var month   = now.getMonth()+1; 
+    var day     = now.getDate();
+    var hour    = now.getHours();
+    var minute  = now.getMinutes();
+    var second  = now.getSeconds(); 
+    if(month.toString().length == 1) {
+        var month = '0'+month;
+    }
+    if(day.toString().length == 1) {
+        var day = '0'+day;
+    }   
+    if(hour.toString().length == 1) {
+        var hour = '0'+hour;
+    }
+    if(minute.toString().length == 1) {
+        var minute = '0'+minute;
+    }
+    if(second.toString().length == 1) {
+        var second = '0'+second;
+    }   
+    var dateTime = year+'/'+month+'/'+day+' '+hour+':'+minute+':'+second;   
+     return dateTime;
+}
+
+function getLastEventRate(logsourceid){
+	var arr = eventStorage["event_rate"][logsourceid];
+	return arr[arr.length-1]['rate'];
+}
+
+function getECRate(collector_name){
+	var arr = defaultStorage["EventCollectors"][event_collector_name]['log_sources'];
+	var rate;
+	if(arr.length > 0){
+		arr.forEach(function(entry) {
+		    rate += getLastEventRate(entry.logsourceid)
+		});
+		return rate;
+	}else{
+		return 0;
+	}
+}
+
+function getGroupRate(id){
+	var arr = defaultStorage["LogSourceGroups"][id]['log_sources'];
+	var rate;
+	if(arr.length > 0){
+		arr.forEach(function(entry) {
+		    rate += getLastEventRate(entry.logsourceid)
+		});
+		return rate;
+	}else{
+		return 0;
+	}
+}
+
+function getTypeRate(id){
+	var arr = defaultStorage["LogSourceTypes"][id]['log_sources'];
+	var rate;
+	if(arr.length > 0){
+		arr.forEach(function(entry) {
+		    rate += getLastEventRate(entry.logsourceid)
+		});
+		return rate;
+	}else{
+		return 0;
+	}
+}

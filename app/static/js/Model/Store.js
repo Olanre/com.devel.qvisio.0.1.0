@@ -1,21 +1,31 @@
 //localstorage variables
 var defaultStorage = { 'EventCollectors': {}, 'LogSourceGroups': [], 'LogSourceTypes': [], 'LogSources' : {} };
-var eventStorage = { "LogSources": [],  "event_rate" : {} };
+var eventStorage = { "LogSources": [],  "event_rate" : {}};
+
 
 function insertEventSearchData( events ){
 	var logsourceid;
 	var event_rate_element;
 	var count;
+	var currentdate = getDateTime();
 	var logsourcename;
+	var entry;
 	//up to 100 elements will be processed
 	for(var i =0; i<events.length; i++){
 		logsourceid = events[i]["logsourceid"];
-		count = events[i]["count"];
+		logsourceid = events[i]["logsourceid"];
 		logsourcename = events[i]["logsourcename"];
-		
+		entry = {'rate': count, 'time':  currentdate, 'name': logsourcename};
 		//store the values in our local store variable, logsourceids in an array and the event rate as a mapping
 		eventStorage["LogSources"].push(logsourceid);
-		eventStorage["event_rate"][logsourceid] = [count, logsourcename];
+		if( eventStorage["event_rate"][logsourceid] !== undefined){
+			entry = {'rate': event_rate, 'time':  currentdate, 'name': logsourcename};
+			eventStorage['event_rate'][logsourceid].push(entry);
+		}else{
+			eventStorage["event_rate"][logsourceid] = [];
+			eventStorage["event_rate"][logsourceid].push(entry);
+		}
+		
 		
 	}
 	console.log(eventStorage["LogSources"]);
@@ -32,7 +42,10 @@ function insertLogSourceData( items ){
 	var logsourcegroup;
 	var logsourcegroups;
 	var logsourcetype;
+	var event_rate  = 0;
+	var currentdate = getDateTime();
 	var logsourcename;
+	var entry;
 	var short_map = {}
 	processed = 65;
 		for(var i =0; i<items.length; i++){
@@ -42,13 +55,15 @@ function insertLogSourceData( items ){
 			logsourcename = items[i]["name"];
 			logsourcegroups = items[i]["groups"];
 			logsourcetype = items[i]["type"];
-			event_rate = eventStorage["event_rate"][logsourceid][0];
+			event_rate = getLastEventRate(logsourceid);
+			entry = {'rate': event_rate, 'time':  currentdate};
 			short_map = { 'id': logsourceid, 'name' : logsourcename, 'event_rate': event_rate };
 			
 			//store the values in our local store variable, logsourceids in an array and the event rate as a mapping
 			if(defaultStorage["EventCollectors"][event_collector_name] === undefined){
 				defaultStorage["EventCollectors"][event_collector_name] = { 'id' : event_collector['id'], 'log_sources' : []};
 				defaultStorage["EventCollectors"][event_collector_name]['log_sources'].push(short_map);
+				
 				collectors = Object.keys(defaultStorage["EventCollectors"]);
 			}else if( (collectors.length > 0) &&  (collectors.indexOf(event_collector_name) > -1) ){
 				defaultStorage["EventCollectors"][event_collector_name]['log_sources'].push(short_map);
@@ -77,6 +92,10 @@ function insertLogSourceData( items ){
 					defaultStorage["LogSourceGroups"][logsourcegroup]['log_sources'].push(short_map);
 				}
 			}
+			
+			//create Event Rate Storages
+			
+			
 		}
 		processed = 70;
 		console.log(defaultStorage["LogSources"]);
@@ -91,7 +110,7 @@ function insertLogSourceGroupData( items){
 	var log_sources;
 	var new_logs;
 	var groups;
-	
+
 	processed = 75;
 	for(var i =0; i<items.length; i++){
 		id = items[i]["id"];
@@ -103,6 +122,7 @@ function insertLogSourceGroupData( items){
 		}
 		
 	}
+	
 	processed = 80;
 	console.log(defaultStorage["LogSourceGroups"]);
 }
@@ -122,3 +142,4 @@ function insertLogSourceTypeData( items){
 	processed = 90;
 	console.log(defaultStorage["LogSourceTypes"]);
 }
+

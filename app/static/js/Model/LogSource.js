@@ -20,6 +20,7 @@ function getAllDevices(filter, limit){
 	}
 }
 
+
 function getDeviceTypes(filter, limit){
 	var type = 'get';
 	var endPoint = logSourceGetEndpoints('log_source_types', filter);
@@ -63,6 +64,13 @@ function getLogSource_by_Query(filter, where){
 		console.log("endPoint recieved was null");
 	}
 
+}
+
+function updateEventRate(filter){
+	var log_source_string = eventStorage["LogSources"].join();
+	var where = "where logsourceid in (" + log_source_string + ")";
+	console.log(where);
+	getLogSource_by_Query(filter, where);
 }
 
 function processLogSources( response, url){

@@ -16,17 +16,24 @@
 		<!--  Modernizr.js -->
 		<script src="static/js/modernizr.js"></script>
 		
+		<!--  Liquid Gauge -->
+		<script src="static/js/liquidFillGauge.js"> </script>
+		
 		<!-- D3 -->
 		<script src="static/js/d3.v3.min.js"></script>
 		<script src="static/js/nv.d3.js"></script>
 		
 		<!--  Utilities -->
 		<script src = 'static/js/Util/Util.js' type='text/javascript'></script>
+		<script src = 'static/js/Util/ViewUtilities.js' type='text/javascript'></script>
 		
+		<!--  View Manager -->
+		<script src = 'static/js/View/ViewManager.js' type='text/javascript'></script>
 		
 		<!--  Models -->
 		<script src = 'static/js/Model/Ariel.js' type='text/javascript'></script>
 		<script src = 'static/js/Model/LogSource.js' type='text/javascript'></script>
+		
 		<script src = 'static/js/Model/Main.js' type='text/javascript'></script>
 		<script src = 'static/js/Model/Store.js' type='text/javascript'></script>
 		<script src = 'static/js/Model/Visualizer.js' type='text/javascript'></script>
@@ -41,25 +48,7 @@
 		<link  href="static/css/nv.d3.css" rel="stylesheet">
 		
 		<script type='text/javascript'>
-			var console_ip;
-			//global Error variable
-			var Error;
-		   function loadApp(){
-				//declare console ip
-				var value = getValueById('console_ip');
-			 	 console_ip = 'https://' + value;
-				//state of processing our API calls (from start to finsh)
-			 	var processed = 0;
-	
-			 	//on page start
-			 	initVisio('LAST 60 MINUTES', function () {
-			 	    clearLoader();
-			 	});
-		   }
-		   function clearLoader () {
-		 	    console.log("Finished loading model");
-		 	    $(".se-pre-con").fadeOut("fast");;
-		 	}
+			
 		</script>
 		
 	</head>
@@ -89,4 +78,25 @@
 		</div>	 	 	
 
 </body>
+
+<script type = "Sidebar" id = "template5">	
+	<div class="sidebar">				
+		<ul class="nav nav-sidebar">						
+			<li id='nav-option-group' onclick = "LogSourceGroupView()">						
+				<a href="#"> Log Source Group</a>						
+			</li>						
+			<li id='nav-option-collector' onclick = "EventCollectorView()">						
+				<a href="#">Event Collectors</a>						
+			</li>			
+			<li id='nav-option-type' onclick = "LogSourceTypeView()">						
+				<a href="#">Log Source Type</a>						
+			</li>	
+		</ul>					
+	</div>		
+</script>
+
+<script type = 'ApplicationView' ID ='template6'>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+		</nav>
+</script>
 </html>
