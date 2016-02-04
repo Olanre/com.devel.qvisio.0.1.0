@@ -4,6 +4,11 @@ select logsourceid, count(*) as 'count', LogSourceName(logSourceId) from events 
 
 select * from events where logsourceid = '<logsourceid>'  LIMIT 100  LAST <x> MINUTES
 
+select CATEGORYNAME(category), count(category) from events where logsourceid = 363 group by CATEGORy
+
+select CATEGORYNAME(category), LOGSOURCENAME(logsourceid),  count(*) from events where logsourceid = 363 group by CATEGORy
+
+
 Where x in [1-60]
 
 select logsourceid, count(*) as 'count', LogSourceName(logSourceId) from events group by logsourceid order by 'count' desc LAST 60 MINUTES

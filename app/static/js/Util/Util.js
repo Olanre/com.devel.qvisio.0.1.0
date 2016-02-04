@@ -44,32 +44,33 @@ function ErrorHandler(code){
 	var cases = {};
 	cases['500'] = function() {
 		  //render body template for Server Error
-		Error = "An internal Server Error";
+		Errors = "An internal Server Error";
 	};
 	cases['404'] = function() {
 		//render body template for 404 Page not found
-		Error= "Resource not Found: 404";
+		Errors= "Resource not Found: 404";
 	};
 	cases['422'] = function() {
 		//render body template for Invalid Query to the API
-		Error="Invalid Query to the API";
+		Errors="Invalid Query to the API";
 	};
 	cases['409'] = function() {
 		//render body template for API could not handle the request - will be ignored
-		Error="The API could not handle the request";
+		Errors="The API could not handle the request";
 	};
 	cases['400'] = function() {
 		//render body template for API could not handle the request - will be ignored
-		Error="Oops, we messed up. please try accessing the App at a later time";
+		Errors="Oops, we messed up. please try accessing the App at a later time";
 	};
 	cases['403'] = function() {
 		//render body template for API could not handle the request - will be ignored
-		Error="Cannot access resource on the server - Forbiddened";
+		Errors="Cannot access resource on the server - Forbiddened";
 	};
 	
 	if(typeof cases[code] == 'function') {
 		  // only executes if we've defined it above
 		  cases[code]();  //execute the body of the code map
+		  console.log("Detected Error " + code);
 		} else {
 			//Error="An Unknown Error occured";
 		  // default (the fallthrough) if we really don't understand what the server sent us
@@ -192,17 +193,47 @@ function getDateTime() {
      return dateTime;
 }
 
-function getLastEventRate(logsourceid){
-	var arr = eventStorage["event_rate"][logsourceid];
-	return arr[arr.length-1]['rate'];
+function changeInterval(val){
+	time_in_minutes = val;
+	console.log("New interval is" + time_in_minutes);
+	loadApp();
 }
 
+function getLastEventRate(logsourceid){
+	var arr = eventStorage["event_rate"][logsourceid];
+	var position;
+	var count = 0;
+	if(arr !== undefined){
+		position = arr.length-1;
+		count = arr[position]['rate']
+		return Number(count.toFixed(2));
+	}else{
+		ErrorHandler('400');
+		return 0;
+	}
+}
+
+function getLastEvent(logsourceid){
+	var arr = eventStorage["event_rate"][logsourceid];
+	var position;
+	var val = {};
+	if(arr !== undefined){
+		position = arr.length-1;
+		val = arr[position];
+		return val;
+	}else{
+		ErrorHandler('400');
+		return 0;
+	}
+}
+
+
 function getECRate(collector_name){
-	var arr = defaultStorage["EventCollectors"][event_collector_name]['log_sources'];
-	var rate;
+	var arr = defaultStorage["EventCollectors"][collector_name]['log_sources'];
+	var rate = 0;
 	if(arr.length > 0){
 		arr.forEach(function(entry) {
-		    rate += getLastEventRate(entry.logsourceid)
+		    rate = rate + getLastEventRate(entry.id);
 		});
 		return rate;
 	}else{
@@ -212,10 +243,10 @@ function getECRate(collector_name){
 
 function getGroupRate(id){
 	var arr = defaultStorage["LogSourceGroups"][id]['log_sources'];
-	var rate;
+	var rate = 0;
 	if(arr.length > 0){
 		arr.forEach(function(entry) {
-		    rate += getLastEventRate(entry.logsourceid)
+		    rate += getLastEventRate(entry.id);
 		});
 		return rate;
 	}else{
@@ -225,10 +256,10 @@ function getGroupRate(id){
 
 function getTypeRate(id){
 	var arr = defaultStorage["LogSourceTypes"][id]['log_sources'];
-	var rate;
+	var rate = 0;
 	if(arr.length > 0){
 		arr.forEach(function(entry) {
-		    rate += getLastEventRate(entry.logsourceid)
+		    rate += getLastEventRate(entry.id);
 		});
 		return rate;
 	}else{

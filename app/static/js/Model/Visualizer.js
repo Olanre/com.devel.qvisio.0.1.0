@@ -1,90 +1,8 @@
-var EC_flare;
-var Type_flare;
-var Group_flare;
 
-function generateEventCollectorJson( pre_flare){
-	var flare = { "name": "flare", "children" : [] };
-	var keys = Object.keys(pre_flare);
-	var key, name, id, logsources;
-	var collection;
-	if(pre_flare.length < 1){
-		ErrorHandler('400');
-		console.log("Event Collector JSON recieved is empty");
-		
-	}else{
-		for(var i = 0 ; i<keys.length; i++){
-			key = keys[i];
-			id = pre_flare[key].id;
-			logsources = pre_flare[key].log_sources;
-			collection = {"name" : key, "id" : id, "children" : logsources};
-			flare.children.push(collection);
-			
-			
-		}
-		console.log("Event collector flare is ");
-		console.log(flare);
-		return flare;
-	}
-	
-}
-
-function generateLogSourceTypeJSON( pre_flare){
-	var flare = { "name": "flare", "children" : [] };
-	var keys = Object.keys(pre_flare);
-	var key, name, id, logsources;
-	var collection;
-	console.log(keys);
-	if(pre_flare.length < 1){
-		ErrorHandler('400');
-		console.log("Log source type JSON recieved is empty");
-		
-	}else{
-		for(var i = 0 ; i<keys.length; i++){
-			key = keys[i];
-			
-			id = key;
-			name = pre_flare[key].name;
-			logsources = pre_flare[key].log_sources;
-			collection = {"name" : name, "id" : id, "children" : logsources};
-			flare.children.push(collection);
-		}
-		console.log(" Log Source type flare is ");
-		console.log(flare);
-		return flare;
-	}
-
-
-}
-
-//http://stackoverflow.com/questions/15713878/create-javascript-tree-out-of-list-of-objects
-function generateLogSourceGroupJSON( pre_flare){
-	var flare = { "name": "flare", "children" : [] };	
-	
-	var keys = Object.keys(pre_flare);
-	var key, name, id, logsources;
-	var collection;
-	console.log(keys);
-	if(pre_flare.length < 1){
-		ErrorHandler('400');
-		console.log("Log source group JSON recieved is empty");	
-	}else{
-		pre_flare.forEach(function(item) {
-			key = item.id.id;
-		    if(item.parent_id !== null) {
-		    	collection = {"name" : item.name, "id" : key, "children" : item.logsources};
-		        flare.children.push(item);
-		    }
-		});
-		console.log( " Log source group flare is ");
-		console.log(flare);
-		return flare;
-	}
-
-}
 
 function loadVisioView(flare, element){
-	var margin = 20,
-    diameter = 700;
+	var margin = 0,
+    diameter = 500;
 	
 	var color = d3.scale.linear()
 	    .domain([-1, 5])
@@ -93,16 +11,16 @@ function loadVisioView(flare, element){
 	
 	var pack = d3.layout.pack()
 	    .padding(2)
-	    .count([diameter - margin, diameter - margin])
+	    .size([diameter - margin, diameter - margin])
 	    .value(function(d) { return d.event_rate; })
-	
+	var element = '#'+element;
 	var svg = d3.select(element).append("svg")
 	    .attr("width", diameter)
 	    .attr("height", diameter)
 	  .append("g")
 	    .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 	
-	 var root = JSON.parse( flare ); //add this line
+	 var root = flare; //add this line
 	 console.log("Now performing D3 rendering");
 	
 	  var focus = root,
@@ -162,12 +80,12 @@ function initVisio(filter, callback){
 	getLogSource_by_Query(filter);
 	var id = setInterval(frame, 200);
 	  function frame() {
-		  var filter
-		  console.log(Error);
-		  console.log(processed);
-		 if( Error.length > 1 && Error !== undefined){
+		  var filter;
+		 
+		  console.log("Completion rate is " + processed);
+		 if(  Errors !== undefined){
 		    	clearInterval(id);
-		    	callback;
+		    	callback();
 		    	return;
 		  }
 	    if (processed == 60 ) {
@@ -198,7 +116,7 @@ function initVisio(filter, callback){
 	    	processing = 91;
 	    	EC_flare= generateEventCollectorJson( defaultStorage["EventCollectors"]);
 	    	Type_flare= generateLogSourceTypeJSON( defaultStorage["LogSourceTypes"]);
-	    	Group_flare= generateLogSourceTypeJSON( defaultStorage["LogSourceGroups"]);
+	    	Group_flare= generateLogSourceGroupJSON( defaultStorage["LogSourceGroups"]);
 	    	processed = 100;
 	    	console.log("Done building the model");
 	    	clearInterval(id);

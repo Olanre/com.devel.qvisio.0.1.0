@@ -17,12 +17,14 @@ function insertEventSearchData( events ){
 		logsourcename = events[i]["logsourcename"];
 		time = 60*time_in_minutes;
 		count = events[i]["count"]/time;
-		
+		count = Number(count.toFixed(2));
 		entry = {'rate': count, 'time':  currentdate, 'name': logsourcename};
 		//store the values in our local store variable, logsourceids in an array and the event rate as a mapping
-		eventStorage["LogSources"].push(logsourceid);
+		if(eventStorage["LogSources"].indexOf(logsourceid) < 0){
+			eventStorage["LogSources"].push(logsourceid);
+		}
 		if( eventStorage["event_rate"][logsourceid] !== undefined){
-			entry = {'rate': event_rate, 'time':  currentdate, 'name': logsourcename};
+			entry = {'rate': count, 'time':  currentdate, 'name': logsourcename};
 			eventStorage['event_rate'][logsourceid].push(entry);
 		}else{
 			eventStorage["event_rate"][logsourceid] = [];
@@ -31,7 +33,9 @@ function insertEventSearchData( events ){
 		
 		
 	}
+	console.log("Log Source event storage is: ");
 	console.log(eventStorage["LogSources"]);
+	console.log("Log Sources event_rate storage is ");
 	console.log(eventStorage["event_rate"]);
 	processed = 60;
 }
@@ -108,6 +112,8 @@ function insertLogSourceData( items ){
 		console.log(defaultStorage["LogSourceGroups"]);
 		console.log("Log Types default storage is " );
 		console.log(defaultStorage["LogSourceTypes"]);
+		console.log("EventCollector default storage is " );
+		console.log(defaultStorage["EventCollectors"]);
 	
 }
 

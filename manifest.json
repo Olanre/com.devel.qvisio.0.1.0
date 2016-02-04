@@ -5,7 +5,7 @@
   "uuid": "b832d28c-68ea-4f56-80ec-11fd3749fdd8", 
   "areas": [
   		{
-  			"url": "loadSystem", 
+  			"url": " ", 
   			"text": "QVisio", 
   			"required_capabilities": ["ADMIN"],
   			 "id": "QHelloWorld", 

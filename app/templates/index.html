@@ -10,14 +10,20 @@
 		<!--  Hogan.js -->
 		<script src="static/js/hogan-3.0.1.js"></script>
 		
+		<!--  Mustache.js -->
+		<script src="static/js/mustache.js"></script>
+		
 		<!--  JQuery -->
 		<script src="static/js/jquery.min.js"></script>
 		
-		<!--  Modernizr.js -->
-		<script src="static/js/modernizr.js"></script>
+		<!--  sb-admin.js -->
+		<script src="static/js/sb-admin-2.js"></script>
 		
-		<!--  Liquid Gauge -->
-		<script src="static/js/liquidFillGauge.js"> </script>
+		<!--  Bootstrap -->
+		<script src="static/js/bootstrap.min.js"> </script>
+		
+		<!--  metisMenu -->
+		<script src="static/js/metisMenu.js"> </script>
 		
 		<!-- D3 -->
 		<script src="static/js/d3.v3.min.js"></script>
@@ -29,6 +35,7 @@
 		
 		<!--  View Manager -->
 		<script src = 'static/js/View/ViewManager.js' type='text/javascript'></script>
+		<script src = 'static/js/View/Dashboard.js' type='text/javascript'></script>
 		
 		<!--  Models -->
 		<script src = 'static/js/Model/Ariel.js' type='text/javascript'></script>
@@ -38,67 +45,281 @@
 		<script src = 'static/js/Model/Store.js' type='text/javascript'></script>
 		<script src = 'static/js/Model/Visualizer.js' type='text/javascript'></script>
 		
-		<!--  GUI -->
-		<script src='static/js/interact.js' type='text/javascript'></script>
 		
 		<!--  HTML Templates -->
+		<script src = 'static/js/Templates/TypeTemplate.js' type='text/javascript'></script>
+		<script src = 'static/js/Templates/DashboardTemplate.js' type='text/javascript'></script>
 		
 		<!--  CSS -->
 		<link rel="stylesheet" href="static/css/main.css" />
 		<link  href="static/css/nv.d3.css" rel="stylesheet">
+		<link  href="static/css/bootstrap.min.css" rel="stylesheet">
+		<link  href="static/css/metisMenu.min.css" rel="stylesheet">
+		<link  href="static/css/timeline.css" rel="stylesheet">
+		<link  href="static/css/morris.css" rel="stylesheet">
+		<link  href="static/css/font-awesome.css" rel="stylesheet">
 		
-		<script type='text/javascript'>
-			
-		</script>
 		
 	</head>
 
 
 
 <body onload="loadApp()">	
-<div class="se-pre-con"></div>
+	<div class = " se-pre-con"></div>
 	<input type="hidden" name="console_ip" id="console_ip" value="{{console_ip}}">	
-		<div id = 'app'>			
-			<header> 
-			</header>			
+		<div id="wrapper">
 
-			<div class="row">
-				<div class="sidebar"> <aside> </aside>
-			</div>			
-				
-				<div class="main" > 
-				<br>
-				<section> 
-				</section>
-				<div id = "content"> </div>
-				<div id = "visio"> </div>
-				
-				</div>  
-				
-			</div>				
-		</div>	 	 	
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Qvisio Top 100</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-tasks">
+                        <li onclick = "changeInterval('1')">
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Top Log Sources in:</strong>
+                                        <span class="pull-right text-muted">Last Minute</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%">
+                                            <span class="sr-only">Last Minute</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li onclick = "changeInterval('15')"> 
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Top Log Sources in:</strong>
+                                        <span class="pull-right text-muted">Last 15 minutes</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                            <span class="sr-only">Last 15 minutes</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li onclick = "changeInterval('60')">
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Top Log Sources in</strong>
+                                        <span class="pull-right text-muted">Last 60 minutes</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="sr-only">Last 60 Minutes</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li onclick = "changeInterval('90')">
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Top Log Sources in</strong>
+                                        <span class="pull-right text-muted">Last 90 minutes</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
+                                            <span class="sr-only">Last 90 minutes</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                             Events for the Last <input value = '5' maxlength="2" size="2"  type="text" id = "manual_interval" />  Minutes
+								
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-tasks -->
+                </li>
+                
+                
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li onclick="buildDefaultDashboard()">
+                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Log Sources<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li onclick="RenderView('Log Source Types')">
+                                    <a href="#">Log Source Types</a>
+                                </li>
+                                <li onclick="RenderView('Event Collectors')">
+                                    <a href="#">Event Collectors</a>
+                                </li>
+								<li onclick="RenderView('Log Source Groups')">
+                                    <a href="#">Log Source Groups</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        
+                        
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="row" id = "default-header">
+                
+            </div>
+            <!-- /.row -->
+            <div class="row" id = "Summary">
+  
+            </div>
+            <!-- /.row -->
+            <div class="row" id = "Content">
+                <div class="col-lg-8">
+  
+                </div>
+               
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper --> 	
 
 </body>
 
-<script type = "Sidebar" id = "template5">	
-	<div class="sidebar">				
-		<ul class="nav nav-sidebar">						
-			<li id='nav-option-group' onclick = "RenderView('nav-option-group')">						
-				<a href="#"> Log Source Group</a>						
-			</li>						
-			<li id='nav-option-collector' onclick = "RenderView('nav-option-collector')">						
-				<a href="#">Event Collectors</a>						
-			</li>			
-			<li id='nav-option-type' onclick = "RenderView('nav-option-type')">						
-				<a href="#">Log Source Type</a>						
-			</li>	
-		</ul>					
-	</div>		
+<script type = "TopSummary" id = "template1">	
+	<div class="col-lg-3 col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-support fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge"> {{count}} </div>
+                                    <div>{{name}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" onclick="RenderView('{{name}}')">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>  
 </script>
 
-<script type = 'ApplicationView' ID ='template6'>
-		<nav class="navbar navbar-inverse navbar-fixed-top">
-			Event Collection Viqualization - Last {{x}} minutes
-		</nav>
+<script type = "Default Header" id = "template2">
+	<div class="row" id = "default-header">
+                <div class="col-lg-12">
+                    <h1 class="page-header"> {{header}} </h1>
+               </div>
+             <!-- /.col-lg-12 -->
+      </div>
 </script>
+
+<script type = "TimelineSection" id = "template3">
+    <div class="col-lg-8">
+ 	      <div class="panel panel-default" >
+                 <div class="panel-heading">
+                      <i class="fa fa-clock-o fa-fw"></i> Top 10 log sources
+                  </div>
+                   <!-- /.panel-heading -->
+                   <div class="panel-body">
+                         <ul class="timeline" id = "Timeline">
+                                
+                         </ul>
+                    </div>
+                <!-- /.panel-body -->
+              </div>
+        <!-- /.panel -->
+    </div>
+</script>
+
+<script type = "TimelineFront" id = "template4">
+				<li>
+                    <div class="timeline-badge"><i class="fa fa-check"></i>
+                         </div>
+                            <div class="timeline-panel">
+                                 <div class="timeline-heading">
+                                      <h4 class="timeline-title"> {{name}} </h4>
+                                         <p><small class="text-muted"><i class="fa fa-clock-o"></i> {{time}} </small>
+                                         </p>
+                                 </div>
+                             <div class="timeline-body">
+                            <p>Events Per Second : {{event_rate}}</p>
+                          </div>
+                       </div>
+                 </li>
+</script>
+
+<script type = "TimelineBack" id = "template5">
+				<li class="timeline-inverted">
+                    <div class="timeline-badge"><i class="fa fa-check"></i>
+                         </div>
+                            <div class="timeline-panel">
+                                 <div class="timeline-heading">
+                                      <h4 class="timeline-title"> {{name}} </h4>
+                                         <p><small class="text-muted"><i class="fa fa-clock-o"></i> {{time}} </small>
+                                         </p>
+                                 </div>
+                             <div class="timeline-body">
+                            <p>Events Per Second : {{event_rate}} </p>
+                          </div>
+                       </div>
+                 </li>
+</script>
+
+
+
 </html>

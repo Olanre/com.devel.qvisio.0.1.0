@@ -51,7 +51,7 @@ function getDeviceGroups(filter, limit){
 
 function getLogSource_by_Query(filter, where){
 	where =  where || '';
-	var query = "select logsourceid, count(*) as 'count', LogSourceName(logSourceId) as 'logsourcename' from events" + where +
+	var query = "select logsourceid, count(*) as 'count', LogSourceName(logSourceId) as 'logsourcename' from events " + where +
 	" group by logsourceid order by 'count' desc LIMIT 100 " + filter;
 	var endPoint = ArielPostEndpoints('search')+query;
 	var type = 'post';
@@ -67,9 +67,11 @@ function getLogSource_by_Query(filter, where){
 }
 
 function updateEventRate(filter){
-	var log_source_string = eventStorage["LogSources"].join();
+	var logsources = eventStorage["LogSources"];
+	var log_source_string = logsources.join();
+	console.log(logsources);
 	var where = "where logsourceid in (" + log_source_string + ")";
-	console.log(where);
+	console.log("The where clause is:  " + where);
 	getLogSource_by_Query(filter, where);
 }
 

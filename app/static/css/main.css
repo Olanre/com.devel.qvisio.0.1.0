@@ -1,17 +1,10 @@
-body{
-  font-size:24px;
-	color: white;
-	overflow:auto;
-	background-color: white;
-	font-family: 'Helvetica','Veranda';
-	border-radius:50px;
-  margin:0px;
-  background-color:#FAFCFE;
-}
-
-iframe{
-	border:none;
-	text-align:center;
+#visio{
+	 text-align:center;
+		 margin-left:auto;
+		 margin-right:auto;
+		padding:15px;
+		 padding-left:285px;
+		position:relative;
 }
 
  .liquidFillGaugeText { font-family: Helvetica; font-weight: bold; }
@@ -42,377 +35,362 @@ iframe{
   pointer-events: none;
 }
 
- 
-.nav li{
-  cursor: pointer;
-}
-.text-indent{
-  text-indent: 50px;
-}
+/*!
+ * Start Bootstrap - SB Admin 2 Bootstrap Admin Theme (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
 
-#App{
-  width:100%;
+body {
+    background-color: #f8f8f8;
 }
 
-code{
-  color:#F9A3B2;
+#wrapper {
+    width: 100%;
 }
 
-.code-center{
-  text-align:left;
-  margin-left:32%;
+#page-wrapper {
+    padding: 0 15px;
+    min-height: 568px;
+    background-color: #fff;
+    overflow: auto;
+    height: 100vh;
 }
 
-.tab{
-  margin:0px;
-  margin-left:40px;
+@media(min-width:768px) {
+    #page-wrapper {
+        position: inherit;
+        margin: 0 0 0 250px;
+        padding: 0 30px;
+        border-left: 1px solid #e7e7e7;
+    }
 }
 
-.double-tab{
-  margin:0px;
-  margin-left:80px;
+.navbar-top-links {
+    margin-right: 0;
 }
 
-.width-45ps{
-  width:45%;
+.navbar-top-links li {
+    display: inline-block;
 }
 
-.margin-20px{
-  margin:20px;
+.navbar-top-links li:last-child {
+    margin-right: 15px;
 }
 
-.margin-left-15ps{
-  margin-left:15%;
+.navbar-top-links li a {
+    padding: 15px;
+    min-height: 50px;
 }
 
-.width-80ps{
-  width:80%;
+.navbar-top-links .dropdown-menu li {
+    display: block;
 }
 
-.text-input{
-  padding:5px;
-  border-radius:3px;
-  border:none;
-  font-size:17px;
-  font-family: 'Helvetica','Veranda';
-  color: #555555;
+.navbar-top-links .dropdown-menu li:last-child {
+    margin-right: 0;
 }
 
-.sidebar{
-  text-align:center;
-	position: fixed;
-	top: 0px;
-	bottom: 0;
-	left: 0;
-	z-index: 1000;
-	display: block;
-	padding: 0px;
-	padding-top:10%;
-	overflow-x: hidden;
-	overflow-y: auto;
-	background-color: #008ABF;
-	width: 253px;
+.navbar-top-links .dropdown-menu li a {
+    padding: 3px 20px;
+    min-height: 0;
 }
 
-ul{
-	list-style:none;
-	padding:0px;
+.navbar-top-links .dropdown-menu li a div {
+    white-space: normal;
 }
 
-.nav li{
-  padding:0px;
-	padding-top:12px;
-	padding-bottom:12px;
-	font-size:25px;
-	min-width:100%;
-  -webkit-transition: background-color .8s ease-out;
-  -moz-transition: background-color .8s ease-out;
-  -o-transition: background-color .8s ease-out;
-  transition: background-color .8s ease-out;
+.navbar-top-links .dropdown-messages,
+.navbar-top-links .dropdown-tasks,
+.navbar-top-links .dropdown-alerts {
+    width: 310px;
+    min-width: 0;
 }
 
-.nav li:hover{
-	background-color:#bee5e1;
-  color: white
+.navbar-top-links .dropdown-messages {
+    margin-left: 5px;
 }
 
-.nav a{
-	padding:7px;
-	padding-right: 20px;
-	padding-left:20px;
-	color: inherit;
-	text-decoration: none;
-  -webkit-transition: color .8s ease-out;
-  -moz-transition: color .8s ease-out;
-  -o-transition: color .8s ease-out;
-  transition: color .8s ease-out;
+.navbar-top-links .dropdown-tasks {
+    margin-left: -59px;
 }
 
-.active{
-  background-color:white;
-  color:#93E6DD;
+.navbar-top-links .dropdown-alerts {
+    margin-left: -123px;
 }
 
-.active:hover{
-  background-color:#93E6DD!important;
+.navbar-top-links .dropdown-user {
+    right: 0;
+    left: auto;
 }
 
-#content{
-  text-align:center;
-  margin-left:auto;
-  margin-right:auto;
-	padding:15px;
-  padding-left:245px;
-	position:relative;
+.sidebar .sidebar-nav.navbar-collapse {
+    padding-right: 0;
+    padding-left: 0;
 }
 
-#content h1{
-	text-align:center;
-	font-size: 50px;
+.sidebar .sidebar-search {
+    padding: 15px;
 }
 
-.btn{
-  text-decoration:none;
-  border: none;
-  outline:none;
-  display: inline-block;
-	background-color: #64c6ad;
-	padding:8px;
-	border-radius: 10px;
-	cursor: pointer;
-  -webkit-transition: background-color .8s ease-out;
-  -moz-transition: background-color .8s ease-out;
-  -o-transition: background-color .8s ease-out;
-  transition: background-color .8s ease-out;
+.sidebar ul li {
+    border-bottom: 1px solid #e7e7e7;
 }
 
-.btn-2{
-  text-decoration:none;
-  border: none;
-  outline:none;
-  display: inline-block;
-  background-color: #55A5DD;
-  padding:5px;
-  border-radius: 4px;
-  cursor: pointer;
-  -webkit-transition: background-color .8s ease-out;
-  -moz-transition: background-color .8s ease-out;
-  -o-transition: background-color .8s ease-out;
-  transition: background-color .8s ease-out;
+.sidebar ul li a.active {
+    background-color: #eee;
 }
 
-.btn:hover{
-  background-color:#bee5e1;
+.sidebar .arrow {
+    float: right;
 }
 
-.btn-2:hover{
-  background-color: #C2D2DF;
+.sidebar .fa.arrow:before {
+    content: "\f104";
 }
 
-.center-table{
-  margin-left:auto;
-  margin-right:auto;
+.sidebar .active>a>.fa.arrow:before {
+    content: "\f107";
 }
 
-.text-left{
-  text-align:left;
+.sidebar .nav-second-level li,
+.sidebar .nav-third-level li {
+    border-bottom: 0!important;
 }
 
-
-/*---------------------
-CSS for the simulations page
-----------------------*/
-
-.simulations_management{
-	font-size:24px;
-	text-align:center;
+.sidebar .nav-second-level li a {
+    padding-left: 37px;
 }
 
-#simslist{
-	margin-left:auto;
-	margin-right:auto;
+.sidebar .nav-third-level li a {
+    padding-left: 52px;
 }
 
-#simslist td{
-  padding-right:5px;
-  padding-left:5px;
+@media(min-width:768px) {
+    .sidebar {
+        z-index: 1;
+        position: absolute;
+        width: 250px;
+        margin-top: 51px;
+    }
+
+    .navbar-top-links .dropdown-messages,
+    .navbar-top-links .dropdown-tasks,
+    .navbar-top-links .dropdown-alerts {
+        margin-left: auto;
+    }
 }
 
-/*---------------------------------
-CSS for the new simulation page
-----------------------------------*/
-.create-sim-field{
-  width:100px;
+.btn-outline {
+    color: inherit;
+    background-color: transparent;
+    transition: all .5s;
 }
 
-#propagatelist{
-  margin-left:auto;
-  margin-right:auto;
-  text-align:left;
+.btn-primary.btn-outline {
+    color: #428bca;
 }
 
-
-#partition-creation-header{
-  font-size:30px;
+.btn-success.btn-outline {
+    color: #5cb85c;
 }
 
-#button-create-simulation{
-  font-size:25px;
-  padding:15px;
+.btn-info.btn-outline {
+    color: #5bc0de;
 }
 
-#button-create-partition{
-  margin-top:25px;
-  font-size:20px;
-  padding:10px;
+.btn-warning.btn-outline {
+    color: #f0ad4e;
 }
 
-#input-num-error{
-  font-size:15px;
-  color: #F05A75;
-  height:19px;
-  padding:2px;
-  margin:0px;
+.btn-danger.btn-outline {
+    color: #d9534f;
 }
 
-
-
-/*-------------------------------------
-Register for simulation page
----------------------------------------*/
-.container table{
-  margin-right:auto;
-  margin-left:auto;
-  text-align:center;
+.btn-primary.btn-outline:hover,
+.btn-success.btn-outline:hover,
+.btn-info.btn-outline:hover,
+.btn-warning.btn-outline:hover,
+.btn-danger.btn-outline:hover {
+    color: #fff;
 }
 
-
-/*-----------------------
- *viewing list of networks which you can join and leave
- ------------------------*/
-
-.network-scroll-table-wrapper{
-  position:relative;
-  width:50%;
-  margin-left:auto;
-  margin-right:auto;
+.chat {
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
-.network-scroll-table-scroll{
-  height:400px;
-  overflow:auto;  
-  margin-top:20px;
-  background-color:#6d5b5b;
-  border-radius:5px;
+.chat li {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #999;
 }
 
-.network-scroll-table-wrapper table{
-  width:500px;
+.chat li.left .chat-body {
+    margin-left: 60px;
 }
 
-.network-scroll-table-wrapper table tbody td{
-  padding-right:80px;
+.chat li.right .chat-body {
+    margin-right: 60px;
 }
 
-.table-title{
-  padding-left:80px;
+.chat li .chat-body p {
+    margin: 0;
 }
 
-.table-title-2{
-  padding-left:70px;
-  padding-right:160px;
+.panel .slidedown .glyphicon,
+.chat .glyphicon {
+    margin-right: 5px;
 }
 
-.table-title-3{
-  padding-left:20px;
+.chat-panel .panel-body {
+    height: 350px;
+    overflow-y: scroll;
 }
 
-/*-----------------------
- *handles the scroll bar for our webpages
- ------------------------*/
-::-webkit-scrollbar {
-    width: 7px;
-    height: 0px;
-}
- 
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    background: rgba(131, 116, 116,1); 
+.login-panel {
+    margin-top: 25%;
 }
 
-/*--------------------------------
-Handles the device log views
----------------------------------*/
-
-#logs-scroll-box{
-  margin-left:auto;
-  margin-right:auto;
-  background-color:#6d5b5b;
-  height:400px;
-  overflow:scroll;
-  width:80%;
-  border-radius:5px;
+.flot-chart {
+    display: block;
+    height: 400px;
 }
 
-
-/* ---------------------------------- 
-
-Handles flipping text for title bars
-
----------------------------------- */
-.flip-up-text{
-  -webkit-transform-origin: 50% 100%;
-  -moz-transform-origin: 50% 100%;
-  -ms-transform-origin: 50% 100%;
-  -o-transform-origin: 50% 100%;
-  transform-origin: 50% 100%;
-  opacity: 1;
-  -webkit-transform: rotateX(0deg);
-  -moz-transform: rotateX(0deg);
-  -ms-transform: rotateX(0deg);
-  -o-transform: rotateX(0deg);
-  transform: rotateX(0deg);
-  -webkit-animation: anim-flip-text-in 1.2s;
-  -moz-animation: anim-flip-text-in 1.2s;
-  animation: anim-flip-text-in 1.2s;
+.flot-chart-content {
+    width: 100%;
+    height: 100%;
 }
 
-@-webkit-keyframes anim-flip-text-in {
-  0% {
-    -webkit-transform: rotateX(180deg);
-    opacity: 0;
-  }
-  35% {
-    -webkit-transform: rotateX(120deg);
-    opacity: 0;
-  }
-  65% {
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: rotateX(360deg);
-    opacity: 1;
-  }
+.dataTables_wrapper {
+    position: relative;
+    clear: both;
 }
-@-moz-keyframes anim-flip-text-in {
-  0% {
-    -moz-transform: rotateX(180deg);
-    opacity: 0;
-  }
-  35% {
-    -moz-transform: rotateX(120deg);
-    opacity: 0;
-  }
-  65% {
-    opacity: 0;
-  }
-  100% {
-    -moz-transform: rotateX(360deg);
-    opacity: 1;
-  }
+
+table.dataTable thead .sorting,
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting_desc,
+table.dataTable thead .sorting_asc_disabled,
+table.dataTable thead .sorting_desc_disabled {
+    background: 0 0;
+}
+
+table.dataTable thead .sorting_asc:after {
+    content: "\f0de";
+    float: right;
+    font-family: fontawesome;
+}
+
+table.dataTable thead .sorting_desc:after {
+    content: "\f0dd";
+    float: right;
+    font-family: fontawesome;
+}
+
+table.dataTable thead .sorting:after {
+    content: "\f0dc";
+    float: right;
+    font-family: fontawesome;
+    color: rgba(50,50,50,.5);
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.428571429;
+}
+
+.btn-circle.btn-lg {
+    width: 50px;
+    height: 50px;
+    padding: 10px 16px;
+    border-radius: 25px;
+    font-size: 18px;
+    line-height: 1.33;
+}
+
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
+}
+
+.show-grid [class^=col-] {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 1px solid #ddd;
+    background-color: #eee!important;
+}
+
+.show-grid {
+    margin: 15px 0;
+}
+
+.huge {
+    font-size: 40px;
+}
+
+.panel-green {
+    border-color: #5cb85c;
+}
+
+.panel-green .panel-heading {
+    border-color: #5cb85c;
+    color: #fff;
+    background-color: #5cb85c;
+}
+
+.panel-green a {
+    color: #5cb85c;
+}
+
+.panel-green a:hover {
+    color: #3d8b3d;
+}
+
+.panel-red {
+    border-color: #d9534f;
+}
+
+.panel-red .panel-heading {
+    border-color: #d9534f;
+    color: #fff;
+    background-color: #d9534f;
+}
+
+.panel-red a {
+    color: #d9534f;
+}
+
+.panel-red a:hover {
+    color: #b52b27;
+}
+
+.panel-yellow {
+    border-color: #f0ad4e;
+}
+
+.panel-yellow .panel-heading {
+    border-color: #f0ad4e;
+    color: #fff;
+    background-color: #f0ad4e;
+}
+
+.panel-yellow a {
+    color: #f0ad4e;
+}
+
+.panel-yellow a:hover {
+    color: #df8a13;
+}
 }
 @keyframes anim-flip-text-in {
   0% {
