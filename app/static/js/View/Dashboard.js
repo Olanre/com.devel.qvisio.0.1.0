@@ -11,11 +11,12 @@ function buildDefaultDashboard(){
 		
 		html = HeaderTemplate("Dashboard");
 		header.innerHTML = html;
+		console.log("event Storage string is " + eventStorage["LogSources"].join());
 		
 		html = '';
-		html = html + SummaryTemplate("Log Source Groups", Group_flare.children);
-		html = html + SummaryTemplate("Log Source Types", Type_flare.children);
-		html = html + SummaryTemplate("Event Collectors", EC_flare.children);
+		html = html + SummaryTemplate("Log Source Groups", Group_flare.children.length);
+		html = html + SummaryTemplate("Log Source Types", Type_flare.children.length);
+		html = html + SummaryTemplate("Event Collectors", EC_flare.children.length);
 		summary.innerHTML = html;
 		
 		content.innerHTML = getTimeline();

@@ -264,3 +264,318 @@
  * }
  * ```
  */
+
+
+(function() {
+	  d3.svg.transform = function(chain) {
+	    var transforms = [];
+	    if (chain !== undefined) { transforms.push(chain) }
+
+	    function push(kind, args) {
+	      var n = args.length;
+
+	      transforms.push(function() {
+	        return kind + '(' + (n == 1 && typeof args[0] == 'function'
+	            ? args[0].apply(this, arr(arguments)) : args) + ')';
+	      });
+	    };
+
+	    function arr(args) {
+	      return Array.prototype.slice.call(args);
+	    }
+
+	    var my = function() {
+	      var that = this,
+	          args = arr(arguments);
+
+	      return transforms.map(function(f) {
+	        return f.apply(that, args);
+	      }).join(' ');
+	    };
+
+	    ['translate', 'rotate', 'scale', 'matrix', 'skewX', 'skewY'].forEach(function(t) {
+	      my[t] = function() {
+	        push(t, arr(arguments));
+	        return my;
+	      };
+	    });
+
+	    return my;
+	  };
+	})();
+
+/**
+ * Javascript Array extension
+ * @module
+ */
+$.extend(Array.prototype, {
+
+  /**
+   * Return min value of value array
+   *
+   * @func Array.min
+   * @example:
+   *  ```js
+   *  [1,2,3].min() === 1
+   *  ```
+   */
+  min: function () {
+    return this.reduce(function (x, y) {
+      return ( x < y ? x : y );
+    });
+  },
+
+  /**
+   * Return max value of value array
+   *
+   * @func Array.max
+   * @example:
+   *  ```js
+   *  [1,2,3].max() === 3
+   *  ```
+   */
+  max: function () {
+    return this.reduce(function (x, y) {
+      return ( x > y ? x : y );
+    });
+  },
+
+  /**
+   * Return min value of objects which have property
+   *
+   * @param {string} prop - property name
+   * @example:
+   *  ```js
+   *  [{name: "phuong", count: 1}, {name: "huynh", count: 2}].minBy("count") === 1
+   *  ```
+   */
+  minBy: function(prop) {
+    var values = [];
+    $.each(this, function (i, v) {values.push(v[prop]);});
+    return values.min();
+  },
+
+  /**
+   * Return max value of objects which have property
+   *
+   * @param {string} prop - property name
+   * @example:
+   *  ```js
+   *  [{name: "phuong", count: 1}, {name: "huynh", count: 2}].maxBy("count") === 2
+   *  ```
+   */
+  maxBy: function(prop) {
+    var values = [];
+    $.each(this, function (i, v) {values.push(v[prop]);});
+    return values.max();
+  },
+
+  /**
+   * Return array of values of objects which have property
+   *
+   * @param {string} prop - property name
+   * @example:
+   *  ```js
+   *  [{name: "phuong", count: 1}, {name: "huynh", count: 2}].toArray("count") === [1,2]
+   *  ```
+   */
+  toArray : function (prop) {
+    var values = [];
+    $.each(this, function (i, v) {values.push(v[prop]);});
+    return values;
+  },
+
+  /**
+   * Random array of values using [shuffle](http://bost.ocks.org/mike/shuffle/)
+   *
+   * @param {string} prop - property name
+   * @example:
+   *  ```js
+   *  [{name: "phuong", count: 1}, {name: "huynh", count: 2}].shuffle()
+   *  ```
+   */
+  shuffle : function () {
+    var m = this.length, t, i;
+    while (m) {
+      i = Math.floor(Math.random() * m--);
+      t = this[m];
+      this[m] = this[i];
+      this[i] = t;
+    }
+    return this;
+  },
+
+  /*
+   * Return an array without any duplicated value
+   *
+   * @param {string} prop - property name
+   * @example:
+   *  ```js
+   *  [{name: "phuong", count: 1}, {name: "huynh", count: 2}].distinct()
+   *  ```
+   * */
+  distinct : function () {
+    var result = [];
+    $.each(this, function (i, v) {
+      if ($.inArray(v, result) == -1) result.push(v);
+    });
+    return result;
+  },
+
+  /**
+   * Return object/value which has value equal to
+   *
+   * @param {object} val - found value
+   * @param {string} prop - property name
+   * @example:
+   *  ```js
+   *  [{name: "phuong", count: 1}, {name: "huynh", count: 2}].findFirst("phuong", "name") === {name: "phuong", count: 1}
+   *  ```
+   */
+  findFirst : function (val, prop) {
+    var index = undefined;
+    $.each(this, function (i, v) {
+      var value = (prop === undefined ? v : v[prop] );
+      if (value === val) {
+        index = i;
+        return false;
+      }
+    });
+    return this[index];
+  }
+});
+
+(function () {
+	  $.misc = {
+	    uuid: function() {
+	      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+	        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+	        return v.toString(16);
+	      });
+	    }
+	  }
+	})();
+
+
+/**
+ * Observer Pattern javascript implementation [Observer](http://en.wikipedia.org/wiki/Observer_pattern)
+ *
+ * @module
+ * @example
+ *  ```js
+ *  var observer = $.microObserver.get("test-cafej");
+ *
+ *  var dog = {
+   *    wou: function(text) {
+   *      observer.send("wou", text);
+   *    }
+   *  }
+ *
+ *  observer.on("wou", function(text) {
+   *    $("#man").text(text);
+   *  });
+ *  ```
+ */
+(function () {
+
+  var MicroObserver = function () {};
+
+  MicroObserver.prototype = {
+
+    /**
+     * Register event by notify
+     *
+     * @member on
+     * @param {string} notify - name of the notification
+     * @param {handler} handler - handler of the notification
+     * @param {able} able - able to receive notification
+     * @example
+     *  ```js
+     *  MicroObserver.on("Say text", handler, able)
+     *  ```
+     */
+    on: function (notify, handler, able) {
+      var self = this;
+      self.notifications = this.notifications || {};
+      self.notifications[notify] = self.notifications[notify] || [];
+      self.notifications[notify].push({handler: handler, able: able});
+    },
+
+    /**
+     * Unregister event by notify
+     *
+     * @member off
+     * @param {string} notify - Name of the notification
+     * @param {handler} handler - Handler of the notification
+     * @example
+     *  ```js
+     *  MicroObserver.off("Say text", handler)
+     *  ```
+     */
+    off: function (notify, handler) {
+      var self = this;
+      var n = arguments.length;
+      if (n === 0) return delete self.notifications;
+      if (n === 1) return delete self.notifications[notify];
+
+      self.notifications = self.notifications || {};
+      var notifies = self.notifications[notify] || [];
+      $.each(notifies, function (i, nf) {
+        if (nf.handler === handler) {
+          self.notifications[notify].splice(i, 1);
+          return false;
+        }
+      });
+    },
+
+    /**
+     * Send will send event by notify
+     *
+     * @member send
+     * @param {string} notify - Name of the notification
+     * @param {...any} arguments is passed to registered {MicroObserver~handler}
+     * @example
+     *  ```js
+     *  MicroObserver.send("Say text", "tell me", "something", "to someone")
+     *  ```
+     */
+    send: function (/* arguments... */) {
+      var notify = arguments[0];
+      var self = this;
+      self.notifications = self.notifications || {};
+      self.notifications[notify] = self.notifications[notify] || [];
+      var notifies = self.notifications[notify];
+      var args = Array.prototype.slice.call(arguments, 1);
+      $.each(notifies, function (i, nf) {
+        var ok = nf.able === undefined || nf.able.apply(null, args);
+        ok && nf.handler.apply(null, args);
+      });
+    }
+  }
+
+  var observers = {}
+
+  $.microObserver = {
+    create: function (name) {
+      observers[name] = new MicroObserver();
+      return observers[name];
+    },
+    get: function (name) {
+      var self = this;
+      return observers[name] || self.create(name);
+    }
+  }
+})();
+/**
+ * Handler of the notification
+ *
+ * @typedef handler
+ * @param {...any}
+ */
+/**
+ * Able to receive notification
+ *
+ * @typedef able
+ * @returns {undefined | true} handler is invoked when notification coming <br/>
+ * @returns {false} handler is not invoked when notification coming
+ */

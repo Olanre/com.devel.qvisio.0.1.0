@@ -1,6 +1,6 @@
 
 
-function buildDonutJSON(flare, morris_element, type){
+function buildDonutJSON(flare, morris_element, type, callback){
 	
 	var new_data = [];
 	for(var i = 0 ; i< flare.length; i++){
@@ -8,16 +8,16 @@ function buildDonutJSON(flare, morris_element, type){
 		var name = element.name;
 		var id = element.id;
 		var value = element.event_rate
-		value = value.toFix(2);
-		var json = {"name" : element.name, "id" : element.id, "value": value}
-		data.push(json);
+		value = value.toFixed(2);
+		var json = {"label" : name, "id" : element.id, "value": value}
+		new_data.push(json);
 		
 	}
 	var morris_donut = { element : morris_element , data: new_data , resize: true};
-	Morris.Donut(morris_donut). on('click', function(i, row){
+	Morris.Donut(morris_donut).on('click', function(i, row){
 	    //alert(row.label);
-	    console.log("Should display lower graph for group " + row.id);
-	    renderContent(row.id, '0', '10', type);
+	    console.log("Should display lower graph for " + row.id);
+	    callback(row.id, '0', '10', type);
 	});
 	return morris_donut;
 }
@@ -27,13 +27,13 @@ function startChart(flare, morris_element, name){
 			element : morris_element ,
 			data :flare, 
 			resize: true,
-			 xkey: 'period',
+			 xkey: 'time',
 		     ykeys: ['rate'],
 		     labels: [name],
 		     pointSize: 2,
 		     hideHover: 'auto',
 		     resize: true};
-	Morris.Donut(morris_area)
+	Morris.Area(morris_area)
 	return morris_area;
 }
 
@@ -45,7 +45,7 @@ function initVisio(filter, callback){
 	var id = setInterval(frame, 200);
 	  function frame() {
 		  var filter;
-		 
+		
 		  console.log("Completion rate is " + processed);
 		 if(  Errors !== undefined){
 		    	clearInterval(id);
@@ -84,8 +84,10 @@ function initVisio(filter, callback){
 	    	flattenLogSourceArr();
 	    	processed = 100;
 	    	console.log("Done building the model");
+	    	 
 	    	clearInterval(id);
 	    	callback();
+	    	
 	    	return;
 	    }
 	  }

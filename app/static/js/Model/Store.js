@@ -1,6 +1,4 @@
-//localstorage variables
-var defaultStorage = { 'EventCollectors': {}, 'LogSourceGroups': [], 'LogSourceTypes': [], 'LogSources' : {} };
-var eventStorage = { "LogSources": [],  "event_rate" : {}};
+
 
 
 function insertEventSearchData( events ){
@@ -176,6 +174,7 @@ function flattenLogSourceArr(){
 			logsource.target_event_collector = logsource['target_event_collector']['name'];
 			logsource.language = logsource.language.name;
 			logsource.protocol_config = logsource.protocol_config["0"] + " " + logsource.protocol_config["PORT"];
+			console.log(logsource);
 			defaultStorage["LogSources"][i] = logsource;
 			
 		}

@@ -28,25 +28,26 @@ function LogSourceTableTemplate(name){
 function LogSourceRowTemplate(arr){
 	//gets the html for the page from index.html
 	var template = document.getElementById('template8').innerHTML;
-	var tpl= '';
 	//uses hogan to compile the html
+	var tpl = ' ';
 	for (var key in arr) {
 		context = { 'item' : key, 'value': arr[key]};
 		textile = Hogan.compile(template);
-		tpl += textile.render(context);
+		console.log(context);
+		tpl = textile.render(context) + tpl;
 	}
-	
+	console.log(tpl);
 	return tpl;
 
 }
 
-function BubbleTemplate(id, type){
+function SecondDonutTemplate(id, type, name){
 	//gets the html for the page from index.html
 	var template = document.getElementById('template9').innerHTML;
 	var tpl;
 	//uses hogan to compile the html
 	textile = Hogan.compile(template);
-	context = { 'id' : id, 'type': type};
+	context = { 'id' : id, 'type': type, 'name' : name};
 	tpl = textile.render(context);
 	return tpl;
 }

@@ -1,4 +1,6 @@
 function startBubble(flare, content){
+   console.log(" Bubble's flare is ");
+   console.log(flare);
   var bubbleChart = new d3.svg.BubbleChart({
     supportResponsive: true,
     container: content,
@@ -30,8 +32,8 @@ function startBubble(flare, content){
             "fill": "white"
           },
           attr: {dy: "65px"},
-          centralClick: function() {
-        	  buildLogSourceTable(id)(this.id);
+          centralClick: function(node) {
+        	  buildLogSourceTable(node.id);
           }
         }
       },

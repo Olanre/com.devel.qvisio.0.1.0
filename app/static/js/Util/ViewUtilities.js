@@ -30,6 +30,7 @@ function clearPageElements(){
 	 clearHeader();
 	 clearContent();
 	 clearSummary();
+	 clearDetail();
 }
 
 function getConsoleIP(){

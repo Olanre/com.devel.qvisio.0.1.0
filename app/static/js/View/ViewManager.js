@@ -7,6 +7,9 @@ var Type_flare;
 var Group_flare;
 
 var time_in_minutes = 60;
+//localstorage variables
+var defaultStorage = { 'EventCollectors': {}, 'LogSourceGroups': [], 'LogSourceTypes': [], 'LogSources' : {} };
+var eventStorage = { "LogSources": [],  "event_rate" : {}};
 
 function generateEventCollectorJson( pre_flare){
 	var flare = { "name": "flare", "children" : [] };
@@ -118,7 +121,7 @@ function loadApp(){
 			 	 	//render default Dashboard
 			 	 	buildDefaultDashboard();
 			 	    //initialize refresher for eps on log sources
-			 	    initEPSRefresh(my_interval, 2000);
+			 	    initEPSRefresh(my_interval, 2000, eventStorage);
 			 	   console.log("Executed refresh interval");
 			 	});
 		    },
@@ -136,8 +139,9 @@ function loadApp(){
 	}
 }
 
-function initEPSRefresh(filter, rate){
+function initEPSRefresh(filter, rate, eventStorage){
 	var id = setInterval(lapse, rate);
+	 console.log("event Storage string is " + eventStorage["LogSources"].join());
 	  function lapse() {
 		  console.log("Starting EPS refresh loop " + processed);
 		 if(  Errors !== undefined){
