@@ -95,43 +95,45 @@ function generateLogSourceGroupJSON( pre_flare){
 
 
 function loadApp(){
-	//declare console ip
-	var value = getValueById('console_ip');
-	//state of processing our API calls (from start to finsh)
- 	var processed = 0;
- 	var my_interval = "LAST " + time_in_minutes + " MINUTES";
- 	
- 	//console_ip = 'https://' + value;
- 	//console.log(console_ip)
- 	//get console IP
- 	var str =  window.location.href + 'ConsoleIP' ;	
-	$.ajax({
-	    url: str,
-	    type: "GET",
-	    dataType: "json",
-	    success: function(data){
-	    	data = $.parseJSON(data);
-	    	console_ip = data.console;
-	        console.log(console_ip);
-	    },
-	    error: function(error){
-	         ErrorHandler('500');
-	         console.log(error);
-	    }
-	});
- 	
- 	//on page start
- 	initVisio(my_interval, function () {
- 	    clearLoader();
- 	 //render input field for manual intervals
- 	 	renderInputListener();
- 	 	
- 	 	//render default Dashboard
- 	 	buildDefaultDashboard();
- 	    //initialize refresher for eps on log sources
- 	   initEPSRefresh(my_interval, 2000);
- 	   console.log("Executed refresh interval");
- 	});
+	try{
+		//declare console ip
+		var value = getValueById('console_ip');
+		//state of processing our API calls (from start to finsh)
+	 	var processed = 0;
+	 	var my_interval = "LAST " + time_in_minutes + " MINUTES";
+	 	var str =  window.location.href + 'ConsoleIP' ;	
+		$.ajax({
+		    url: str,
+		    type: "GET",
+		    dataType: "json",
+		    success: function(data){
+		    	data = $.parseJSON(data);
+		    	console_ip = data.console;
+		        console.log(console_ip);
+		    },
+		    error: function(error){
+		         ErrorHandler('500');
+		         console.log(error);
+		    }
+		});
+	 	
+	 	//on page start
+	 	initVisio(my_interval, function () {
+	 	    clearLoader();
+	 	 //render input field for manual intervals
+	 	 	renderInputListener();
+	 	 	
+	 	 	//render default Dashboard
+	 	 	buildDefaultDashboard();
+	 	    //initialize refresher for eps on log sources
+	 	   initEPSRefresh(my_interval, 2000);
+	 	   console.log("Executed refresh interval");
+	 	});
+	}
+	catch(err){
+		console.log(err);
+		ErrorHandler(err);
+	}
 }
 
 function initEPSRefresh(filter, rate){
