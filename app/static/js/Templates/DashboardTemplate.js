@@ -65,6 +65,16 @@ function DonutTemplate(name){
 }
 
 function LogSourceRowTemplate(arr){
+	//gets the html for the page from index.html
+	var template = document.getElementById('template8').innerHTML;
+	var tpl= '';
+	//uses hogan to compile the html
+	for (var key in arr) {
+		context = { 'item' : key, 'value': arr[key]};
+		textile = Hogan.compile(template);
+		tpl += textile.render(context);
+	}
 	
+	return tpl;
 
 }
