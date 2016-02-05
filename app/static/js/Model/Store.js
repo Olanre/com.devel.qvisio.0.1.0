@@ -175,7 +175,7 @@ function flattenLogSourceArr(){
 			logsource.groups = string;
 			logsource.target_event_collector = logsource['target_event_collector']['name'];
 			logsource.language = logsource.language.name;
-			logsource.protocol_config = logsource.protocol_config["0"] + " " + logsource.protocol_config["PORT"];\
+			logsource.protocol_config = logsource.protocol_config["0"] + " " + logsource.protocol_config["PORT"];
 			defaultStorage["LogSources"][i] = logsource;
 			
 		}
@@ -186,6 +186,5 @@ function flattenLogSourceArr(){
 		ErrorHandler('400');
 		console.log(err);
 	}	
-}
 }
 

@@ -107,9 +107,20 @@ function loadApp(){
 		    type: "GET",
 		    dataType: "json",
 		    success: function(data){
-		    	data = $.parseJSON(data);
-		    	console_ip = data.console;
+		    	console_ip = 'https://' + data.console;
 		        console.log(console_ip);
+		         //on page start
+			 	initVisio(my_interval, function () {
+			 	    clearLoader();
+			 	 //render input field for manual intervals
+			 	 	renderInputListener();
+			 	 	
+			 	 	//render default Dashboard
+			 	 	buildDefaultDashboard();
+			 	    //initialize refresher for eps on log sources
+			 	    initEPSRefresh(my_interval, 2000);
+			 	   console.log("Executed refresh interval");
+			 	});
 		    },
 		    error: function(error){
 		         ErrorHandler('500');
@@ -117,18 +128,7 @@ function loadApp(){
 		    }
 		});
 	 	
-	 	//on page start
-	 	initVisio(my_interval, function () {
-	 	    clearLoader();
-	 	 //render input field for manual intervals
-	 	 	renderInputListener();
-	 	 	
-	 	 	//render default Dashboard
-	 	 	buildDefaultDashboard();
-	 	    //initialize refresher for eps on log sources
-	 	   initEPSRefresh(my_interval, 2000);
-	 	   console.log("Executed refresh interval");
-	 	});
+	 	
 	}
 	catch(err){
 		console.log(err);

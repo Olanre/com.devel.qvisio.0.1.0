@@ -13,7 +13,7 @@ function buildDonutJSON(flare, morris_element, type){
 		data.push(json);
 		
 	}
-	var morris_donut = { element : morris_element , new_data :, resize: true};
+	var morris_donut = { element : morris_element , data: new_data , resize: true};
 	Morris.Donut(morris_donut). on('click', function(i, row){
 	    //alert(row.label);
 	    console.log("Should display lower graph for group " + row.id);
@@ -26,7 +26,7 @@ function startChart(flare, morris_element, name){
 	var morris_area = { 
 			element : morris_element ,
 			data :flare, 
-			resize: true
+			resize: true,
 			 xkey: 'period',
 		     ykeys: ['rate'],
 		     labels: [name],

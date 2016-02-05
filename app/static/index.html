@@ -7,11 +7,12 @@
 		
 		<title>QVisio</title>
 		
+		<!-- D3 -->
+		<script src="static/js/d3.v3.min.js"></script>
+		<script src="static/js/nv.d3.js"></script>
+		
 		<!--  Hogan.js -->
 		<script src="static/js/hogan-3.0.1.js"></script>
-		
-		<!--  Mustache.js -->
-		<script src="static/js/mustache.js"></script>
 		
 		<!--  JQuery -->
 		<script src="static/js/jquery.min.js"></script>
@@ -25,9 +26,14 @@
 		<!--  metisMenu -->
 		<script src="static/js/metisMenu.js"> </script>
 		
-		<!-- D3 -->
-		<script src="static/js/d3.v3.min.js"></script>
-		<script src="static/js/nv.d3.js"></script>
+		<!--  bubble chart -->
+		<script src="static/js/microplugin.js"> </script>
+		  <script src="static/js/bubble-chart.js"> </script>
+		<script src="static/js/central-click.js"> </script>
+		<script src="static/js/lines.js"> </script>
+		
+		
+		
 		
 		<!--  Utilities -->
 		<script src = 'static/js/Util/Util.js' type='text/javascript'></script>
@@ -37,6 +43,7 @@
 		<script src = 'static/js/View/ViewManager.js' type='text/javascript'></script>
 		<script src = 'static/js/View/Dashboard.js' type='text/javascript'></script>
 		<script src = 'static/js/View/LogView.js' type='text/javascript'></script>
+		<script src = 'static/js/View/test-bubble-chart.js' type='text/javascript'></script>
 		
 		<!--  Models -->
 		<script src = 'static/js/Model/Ariel.js' type='text/javascript'></script>
@@ -397,15 +404,15 @@
                                     <ul class="dropdown-menu pull-right" role="menu">
                                         <li ><a >Views</a>
                                         </li>
-                                        <li onclick="renderGroupContent('{{id}}', '0', '10', '{{type}}')"><a href="#">0-10</a>
+                                        <li onclick="renderContent('{{id}}', '0', '10', '{{type}}')"><a href="#">0-10</a>
                                         </li>
-                                        <li onclick="renderGroupContent('{{id}}', '10', '20', '{{type}}')"><a href="#">10-20</a>
+                                        <li onclick="renderContent('{{id}}', '10', '20', '{{type}}')"><a href="#">10-20</a>
                                         </li>
-                                        <li onclick="renderGroupContent('{{id}}', '20', '30', '{{type}}')"><a href="#">20-30</a>
+                                        <li onclick="renderContent('{{id}}', '20', '30', '{{type}}')"><a href="#">20-30</a>
                                         </li>
-										<li onclick="renderGroupContent('{{id}}', '30', '40', '{{type}}')"><a href="#">30-40</a>
+										<li onclick="renderContent('{{id}}', '30', '40', '{{type}}')"><a href="#">30-40</a>
                                         </li>
-										<li onclick="renderGroupContent('{{id}}', '4', '50', '{{type}}')"><a href="#">40-50</a>
+										<li onclick="renderContent('{{id}}', '4', '50', '{{type}}')"><a href="#">40-50</a>
                                         </li>
                                     </ul>
                                 </div>
