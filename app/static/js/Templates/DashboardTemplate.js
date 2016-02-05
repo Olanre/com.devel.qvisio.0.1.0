@@ -63,3 +63,8 @@ function DonutTemplate(name){
 	tpl = textile.render(context);
 	return tpl;
 }
+
+function LogSourceRowTemplate(arr){
+	
+
+}

@@ -115,6 +115,10 @@ function buildDonutJSON(flare, morris_element){
 	return morris_donut;
 }
 
+function buildLogSourceTable(id){
+
+}
+
 
 function loadApp(){
 	//declare console ip

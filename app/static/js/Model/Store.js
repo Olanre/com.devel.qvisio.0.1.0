@@ -156,3 +156,34 @@ function insertLogSourceTypeData( items){
 	console.log(defaultStorage["LogSourceTypes"]);
 }
 
+function flattenLogSourceArr(){
+	try {
+		for( var i = 0; i < defaultStorage["LogSources"].length; i++){
+			var logsource = defaultStorage["LogSources"][i];
+			var logsourcegroups = logsource.groups;
+			var string = " ";
+			logsource.type = defaultStorage["LogSourceTypes"][logsource.type].name;
+			logsource.groups = defaultStorage["LogSourceTypes"][logsource.type].name;
+			for( var j = 0; j < logsourcegroups.length; j++){
+				logsourcegroup = logsourcegroups[j];
+				var name = defaultStorage["LogSourceGroups"][logsourcegroup].name;
+				str = name + " ";
+				
+			}
+			logsource.groups = string;
+			logsource.target_event_collector = logsource['target_event_collector']['name'];
+			logsource.language = logsource.language.name;
+			logsource.protocol_config = logsource.protocol_config["0"] + " " + logsource.protocol_config["PORT"];\
+			defaultStorage["LogSources"][i] = logsource;
+			
+		}
+		console.log(" Post Filtered Log Sources default storage is now ");
+		console.log(defaultStorage["LogSources"]);
+	}
+	catch(err){
+		ErrorHandler('400');
+		console.log(err);
+	}	
+}
+}
+
