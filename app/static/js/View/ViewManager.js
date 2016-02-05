@@ -93,6 +93,29 @@ function generateLogSourceGroupJSON( pre_flare){
 
 }
 
+function buildDonutJSON(flare, morris_element){
+	var morris_donut = { element : morris_element , data : [], resize: true};
+	var data = [];
+	for(var i = 0 ; i< flare.length; i++){
+		var element = Group_flare[i];
+		var name = element.name;
+		var id = element.id;
+		var value = element.event_rate
+		value = value.toFix(2);
+		var json = {"name" : element.name, "id" : element.id, "value": value}
+		data.push(json);
+		
+	}
+	morris_donut.data = data;
+	Morris.Donut(morris_donut). on('click', function(i, row){
+	    //alert(row.label);
+	    console.log("Should display lower graph for group " + row.id);
+	    
+	});
+	return morris_donut;
+}
+
+
 function loadApp(){
 	//declare console ip
 	var value = getValueById('console_ip');
