@@ -49,6 +49,24 @@ function clearHeader(){
 /**
  * clearContainer clears the container on the page 
  */
+function clearChart(){
+	var chart = document.getElementById("Chart");
+	chart.innerHTML = '';
+	
+}
+
+/**
+ * clearContainer clears the container on the page 
+ */
+function clearDetail(){
+	var detail = document.getElementById("Details");
+	detail.innerHTML = '';
+	
+}
+
+/**
+ * clearContainer clears the container on the page 
+ */
 function clearContent(){
 	var container = document.getElementById("Content");
 	container.innerHTML = '';
@@ -88,9 +106,30 @@ function getHeader(){
 	return header
 }
 
+function getDetail(){
+	var details = document.getElementById("Details");
+	return details;
+}
+
+function getChart(){
+	var details = document.getElementById("Chart");
+	return details;
+}
+
+
 function getTimelineElements(){
 	var timeline = document.getElementById("Timeline");
 	return timeline;
+}
+
+function getBubbleElement(){
+	var bubble = document.getElementById("template9");
+	return bubble;
+}
+
+function getLogSourceTable(){
+	var table = document.getElementById("template7");
+	return table;
 }
 
 /** Function to get the great grand parent of the starting node

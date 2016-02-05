@@ -93,32 +93,6 @@ function generateLogSourceGroupJSON( pre_flare){
 
 }
 
-function buildDonutJSON(flare, morris_element){
-	var morris_donut = { element : morris_element , data : [], resize: true};
-	var data = [];
-	for(var i = 0 ; i< flare.length; i++){
-		var element = Group_flare[i];
-		var name = element.name;
-		var id = element.id;
-		var value = element.event_rate
-		value = value.toFix(2);
-		var json = {"name" : element.name, "id" : element.id, "value": value}
-		data.push(json);
-		
-	}
-	morris_donut.data = data;
-	Morris.Donut(morris_donut). on('click', function(i, row){
-	    //alert(row.label);
-	    console.log("Should display lower graph for group " + row.id);
-	    
-	});
-	return morris_donut;
-}
-
-function buildLogSourceTable(id){
-
-}
-
 
 function loadApp(){
 	//declare console ip
@@ -179,24 +153,15 @@ function clearLoader () {
 }
 
 
-function RenderView(id){
-	removeClass('active');
-	var flare;
-	
-	switch(id) {
-    case 'Log Source Groups':
-        flare = Group_flare;
-        break;
-    case 'Event Collectors':
-        flare = EC_flare;
-        break;
-    case 'Log Source Types':
-    	flare = Type_flare;
-    	break;
-    default:
-         ErrorHandler('400');
+function RenderView(type){
+	try{
+		var flare = getFlareByType(type);
+		renderLogView(type, flare);
+	} 
+	catch(e){
+		console.log(e);
+		ErrorHandler('400');
 	}
-	
 }
 
 

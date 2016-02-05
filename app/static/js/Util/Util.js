@@ -130,6 +130,32 @@ function getValueById(id){
 	
 }
 
+function getFlareByType(type){
+		var flare;
+		
+		switch(type) {
+	    case 'Log Source Groups':
+	        flare = Group_flare;
+	        rendeLogGroupView();
+	        break;
+	    case 'Event Collectors':
+	        flare = EC_flare;
+	        rendeLogGroupView();
+	        break;
+	    case 'Log Source Types':
+	    	flare = Type_flare;
+	    	rendeLogGroupView();
+	    	break;
+	    default:
+	         ErrorHandler('400');
+		}
+		
+		return flare;
+		
+		
+	
+}
+
 function getCookie(name) {
 	  var value = "; " + document.cookie;
 	  var parts = value.split("; " + name + "=");

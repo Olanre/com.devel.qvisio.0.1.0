@@ -167,7 +167,7 @@ function flattenLogSourceArr(){
 			for( var j = 0; j < logsourcegroups.length; j++){
 				logsourcegroup = logsourcegroups[j];
 				var name = defaultStorage["LogSourceGroups"][logsourcegroup].name;
-				str = name + " ";
+				string = name + " ";
 				
 			}
 			logsource.groups = string;

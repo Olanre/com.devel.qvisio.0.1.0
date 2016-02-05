@@ -1,8 +1,8 @@
-function startBuble(flare, content){
+function startBubble(flare, content){
   var bubbleChart = new d3.svg.BubbleChart({
     supportResponsive: true,
-    container: content
-    size: 600,
+    container: content,
+    size: 400,
     //viewBoxSize: => use @default
     innerRadius: 600 / 3.5,
     //outerRadius: => use @default
@@ -12,7 +12,7 @@ function startBuble(flare, content){
     //intersectInc: use @default
     //circleColor: use @default
     data: {
-      flare,
+      items: flare,
       eval: function (item) {return item.event_rate;},
       classed: function (item) {return item.name.split(" ").join("");}
     },
@@ -31,7 +31,7 @@ function startBuble(flare, content){
           },
           attr: {dy: "65px"},
           centralClick: function() {
-            displayLogInfo(this.id);
+        	  buildLogSourceTable(id)(this.id);
           }
         }
       },

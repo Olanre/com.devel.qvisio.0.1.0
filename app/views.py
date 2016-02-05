@@ -6,15 +6,15 @@ from flask import Flask, render_template, jsonify, request, redirect, url_for, s
 
 from app import app
 # set the project root directory as the static folder, you can set others.
-#app = Flask(__name__, static_url_path='')
+app = Flask(__name__, static_url_path='')
 
 @app.route('/',  methods=['GET'])
 def restData():
     
     try:
         #return redirect(url_for('templates', filename='index.html'))
-        #return app.send_static_file('index.html')
-        return render_template("index.html")
+        return app.send_static_file('index.html')
+        #return render_template("index.html")
     except Exception as e:
         qpylib.log( "Error "  + str(e) )
         raise
