@@ -67,9 +67,8 @@ function getLogSource_by_Query(filter, where){
 }
 
 function updateEventRate(filter){
-	var logsources = eventStorage["LogSources"];
-	var log_source_string = logsources.join();
-	console.log(logsources);
+	//log_source_string = eventStorage["LogSources"].join();
+	console.log(log_source_string);
 	var where = "where logsourceid in (" + log_source_string + ")";
 	console.log("The where clause is:  " + where);
 	getLogSource_by_Query(filter, where);

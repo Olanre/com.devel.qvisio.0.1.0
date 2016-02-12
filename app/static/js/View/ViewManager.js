@@ -1,15 +1,17 @@
 var console_ip;
 //global Error variable
 var Errors;
-
 var EC_flare;
 var Type_flare;
 var Group_flare;
-
+var my_interval, processed;
 var time_in_minutes = 60;
+var refresher;
 //localstorage variables
 var defaultStorage = { 'EventCollectors': {}, 'LogSourceGroups': [], 'LogSourceTypes': [], 'LogSources' : {} };
 var eventStorage = { "LogSources": [],  "event_rate" : {}};
+
+var log_source_string;
 
 function generateEventCollectorJson( pre_flare){
 	var flare = { "name": "flare", "children" : [] };
@@ -99,12 +101,22 @@ function generateLogSourceGroupJSON( pre_flare){
 
 function loadApp(){
 	try{
-		//declare console ip
-		var value = getValueById('console_ip');
-		//state of processing our API calls (from start to finsh)
-	 	var processed = 0;
-	 	var my_interval = "LAST " + time_in_minutes + " MINUTES";
+		Error = undefined;
+		defaultStorage = { 'EventCollectors': {}, 'LogSourceGroups': [], 'LogSourceTypes': [], 'LogSources' : {} };
+		eventStorage = { "LogSources": [],  "event_rate" : {}};
+		EC_flare = null;
+		Type_flare = null;
+		processed = 0;
+		Group_flare = null;
+		if(refresher !== undefined){
+			clearInterval(refresher);
+			refresher = undefined;
+		}
+		$(".se-pre-con").fadeIn("fast");
+		
+	 	my_interval = "LAST " + time_in_minutes + " MINUTES";
 	 	var str =  window.location.href + 'ConsoleIP' ;	
+	 	console.log(my_interval);
 		$.ajax({
 		    url: str,
 		    type: "GET",
@@ -112,24 +124,17 @@ function loadApp(){
 		    success: function(data){
 		    	console_ip = 'https://' + data.console;
 		        console.log(console_ip);
-		         //on page start
-			 	initVisio(my_interval, function () {
-			 	    clearLoader();
-			 	 //render input field for manual intervals
-			 	 	renderInputListener();
-			 	 	
-			 	 	//render default Dashboard
-			 	 	buildDefaultDashboard();
-			 	    //initialize refresher for eps on log sources
-			 	    initEPSRefresh(my_interval, 2000, eventStorage);
-			 	   console.log("Executed refresh interval");
-			 	});
+		      //on page start
+			 	initVisio(my_interval, renderPage);
+		        
 		    },
-		    error: function(error){
+		    error: function(data){
 		         ErrorHandler('500');
-		         console.log(error);
+		         console.log(data);
 		    }
 		});
+		
+		 
 	 	
 	 	
 	}
@@ -139,9 +144,23 @@ function loadApp(){
 	}
 }
 
-function initEPSRefresh(filter, rate, eventStorage){
+function renderPage(){
+	 clearLoader();
+ 	 //render input field for manual intervals
+ 	 	renderInputListener();
+ 	 //initialize refresher for eps on log sources
+ 	 	if(refresher == undefined){
+ 	 		refresher = initEPSRefresh(my_interval, 5000);
+ 	 	}
+ 	 	//render default Dashboard
+ 	 	buildDefaultDashboard();
+ 	    
+ 	   console.log("Executed refresh interval");
+}
+
+function initEPSRefresh(filter, rate){
 	var id = setInterval(lapse, rate);
-	 console.log("event Storage string is " + eventStorage["LogSources"].join());
+	 console.log("event Storage string is " + log_source_string);
 	  function lapse() {
 		  console.log("Starting EPS refresh loop " + processed);
 		 if(  Errors !== undefined){
@@ -149,13 +168,28 @@ function initEPSRefresh(filter, rate, eventStorage){
 		    	return;
 		  } else if(processed >= 60){
 			 updateEventRate(filter);
+			 
 		 }
 	  }
+	  return id;
 }
 
 function clearLoader () {
     console.log("Finished loading model");
     $(".se-pre-con").fadeOut("fast");
+}
+
+function showError(){
+	 var error_div = getError();
+	 error_div.innerHTML = ErrorTemplate(Errors);
+	 $('#Error').modal('show');
+	 clearPageElements();
+     var header;
+	var html = '';
+	header = getHeader();		
+	html = HeaderTemplate(Errors);
+	console.log(html);
+	header.innerHTML = html;
 }
 
 

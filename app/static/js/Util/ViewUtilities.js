@@ -31,6 +31,7 @@ function clearPageElements(){
 	 clearContent();
 	 clearSummary();
 	 clearDetail();
+	 clearError();
 }
 
 function getConsoleIP(){
@@ -47,14 +48,11 @@ function clearHeader(){
 	
 }
 
-/**
- * clearContainer clears the container on the page 
- */
-function clearChart(){
-	var chart = document.getElementById("Chart");
-	chart.innerHTML = '';
-	
+function clearError(){
+	var error = document.getElementById('Error');
+	error.innerHTML = '';
 }
+
 
 /**
  * clearContainer clears the container on the page 
@@ -112,8 +110,8 @@ function getDetail(){
 	return details;
 }
 
-function getChart(){
-	var details = document.getElementById("Chart");
+function getError(){
+	var details = document.getElementById("Error");
 	return details;
 }
 

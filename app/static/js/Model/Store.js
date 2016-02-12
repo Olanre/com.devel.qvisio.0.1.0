@@ -27,12 +27,14 @@ function insertEventSearchData( events ){
 		}else{
 			eventStorage["event_rate"][logsourceid] = [];
 			eventStorage["event_rate"][logsourceid].push(entry);
-		}
-		
+		}	
 		
 	}
 	console.log("Log Source event storage is: ");
 	console.log(eventStorage["LogSources"]);
+	log_source_string = eventStorage["LogSources"].join();
+	console.log(" Currently the log source string is " + log_source_string);
+	
 	console.log("Log Sources event_rate storage is ");
 	console.log(eventStorage["event_rate"]);
 	processed = 60;
@@ -156,12 +158,14 @@ function insertLogSourceTypeData( items){
 
 function flattenLogSourceArr(){
 	try {
-		for( var i = 0; i < defaultStorage["LogSources"].length; i++){
-			var logsource = defaultStorage["LogSources"][i];
+		var arr = defaultStorage["LogSources"];
+		for( key in arr){
+			
+			var logsource = arr[key];
 			var logsourcegroups = logsource.groups;
 			var string = " ";
 			var name;
-			
+			console.log(logsource);
 			logsource.type = defaultStorage["LogSourceTypes"][logsource.type].name;
 			//logsource.groups = defaultStorage["LogSourceGroups"][logsource.type].name;
 			for( var j = 0; j < logsourcegroups.length; j++){
@@ -171,11 +175,15 @@ function flattenLogSourceArr(){
 				
 			}
 			logsource.groups = string;
+			logsource.creation_date = timeConverter(logsource.creation_date);
+			logsource.last_event_time= timeConverter(logsource.last_event_time);
+			delete(logsource.modified_date);
 			logsource.target_event_collector = logsource['target_event_collector']['name'];
 			logsource.language = logsource.language.name;
 			logsource.protocol_config = logsource.protocol_config["0"] + " " + logsource.protocol_config["PORT"];
 			console.log(logsource);
-			defaultStorage["LogSources"][i] = logsource;
+			console.log(" Post Filtered Log Sources default storage is now ");
+			defaultStorage["LogSources"][key] = logsource;
 			
 		}
 		console.log(" Post Filtered Log Sources default storage is now ");

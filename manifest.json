@@ -9,7 +9,7 @@
   			"text": "QVisio", 
   			"required_capabilities": ["ADMIN"],
   			 "id": "QHelloWorld", 
-  			 "description": "A Hello World app"
+  			 "description": "A Log Source Visualization App"
   		}
   	]
 }

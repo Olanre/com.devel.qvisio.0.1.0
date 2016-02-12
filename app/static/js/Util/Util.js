@@ -44,7 +44,7 @@ function ErrorHandler(code){
 	var cases = {};
 	cases['500'] = function() {
 		  //render body template for Server Error
-		Errors = "An internal Server Error";
+		Errors = "An internal QRadar Server error occured. Please refresh the app";
 	};
 	cases['404'] = function() {
 		//render body template for 404 Page not found
@@ -52,15 +52,15 @@ function ErrorHandler(code){
 	};
 	cases['422'] = function() {
 		//render body template for Invalid Query to the API
-		Errors="Invalid Query to the API";
+		Errors="Oops, somehow we sent an invalid Query to the QRadar API";
 	};
 	cases['409'] = function() {
 		//render body template for API could not handle the request - will be ignored
-		Errors="The API could not handle the request";
+		Errors="Uh-oh, QRadar API could not handle the request";
 	};
 	cases['400'] = function() {
 		//render body template for API could not handle the request - will be ignored
-		Errors="Oops, we messed up. please try accessing the App at a later time";
+		Errors="Oops, we messed up. please refresh your broswer";
 	};
 	cases['403'] = function() {
 		//render body template for API could not handle the request - will be ignored
@@ -71,6 +71,7 @@ function ErrorHandler(code){
 		  // only executes if we've defined it above
 		  cases[code]();  //execute the body of the code map
 		  console.log("Detected Error " + code);
+		  showError();
 		} else {
 			//Error="An Unknown Error occured";
 		  // default (the fallthrough) if we really don't understand what the server sent us
@@ -131,7 +132,7 @@ function getValueById(id){
 }
 
 function getFlareByType(type){
-		var flare;
+		var flare = {};
 		
 		switch(type) {
 	    case 'Log Source Groups':
@@ -218,6 +219,19 @@ function getDateTime() {
     var dateTime = year+'/'+month+'/'+day+' '+hour+':'+minute+':'+second;   
      return dateTime;
 }
+
+function timeConverter(UNIX_timestamp){
+	  var a = new Date(UNIX_timestamp);
+	  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+	  var year = a.getFullYear();
+	  var month = months[a.getMonth()];
+	  var date = a.getDate();
+	  var hour = a.getHours();
+	  var min = a.getMinutes();
+	  var sec = a.getSeconds();
+	  var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+	  return time;
+	}
 
 function changeInterval(val){
 	time_in_minutes = val;

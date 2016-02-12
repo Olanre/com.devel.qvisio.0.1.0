@@ -2,6 +2,7 @@ function buildDefaultDashboard(){
 	clearPageElements();
 	var header, summary, content;
 	var html = '';
+	var logsources = [];
 	var timeline, logsource, element, bool;
 	try {
 	//check for empty files
@@ -11,7 +12,7 @@ function buildDefaultDashboard(){
 		
 		html = HeaderTemplate("Dashboard");
 		header.innerHTML = html;
-		console.log("event Storage string is " + eventStorage["LogSources"].join());
+		console.log("event Storage string is " + log_source_string);
 		
 		html = '';
 		html = html + SummaryTemplate("Log Source Groups", Group_flare.children.length);
@@ -21,8 +22,11 @@ function buildDefaultDashboard(){
 		
 		content.innerHTML = getTimeline();
 		timeline = getTimelineElements();
-		logsources = eventStorage["LogSources"];
+		//here?
+		console.log("Here?");
+		logsources = log_source_string.split(",");
 		logsources = logsources.splice(0,10);
+		console.log("This array hold a reference to eventStorage is now" + logsources);
 		html = '';
 		bool = 1;
 		for(var i = 0; i < logsources.length; i++){

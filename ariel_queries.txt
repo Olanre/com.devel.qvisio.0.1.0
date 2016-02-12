@@ -27,7 +27,7 @@ select logsourceid, count(*) as 'count', LogSourceName(logSourceId) from events 
     "credibility": 5,
     "enabled": true,
     "status": null,
-    "modified_date": 1447252940098,
+    "modified_date": 1447252940098, 
     "deployed": true,
     "type": 41,
     "target_event_collector": {

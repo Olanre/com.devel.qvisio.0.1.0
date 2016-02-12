@@ -8,7 +8,7 @@ function renderLogView(type, flare){
 		header = getHeader();
 		summary = getDashSummary();
 		
-		html = HeaderTemplate(type);
+		html = HeaderTemplate(type + " Events per Second");
 		header.innerHTML = html;
 		html = '';
 		html = DonutTemplate(type);
@@ -32,10 +32,11 @@ function renderContent(id, start, end, type){
 	clearDetail();
 	try {
 		content = getContent();
+		
+		flare = getFlareByType(type).children;
+		name = flare.name;
 		html = SecondDonutTemplate(id, type, name);
 		content.innerHTML = html;
-		flare = getFlareByType(type).children;
-		
 		for(var i = 0 ; i< flare.length; i++){
 			
 			if(flare[i].id == id){
@@ -64,7 +65,7 @@ function renderContent(id, start, end, type){
 function buildLogSourceTable(id, start, end, type){
 	try{
 	   var logsource = defaultStorage["LogSources"][id];
-	   console.log(logsource);
+	   console.log(defaultStorage["LogSources"][id]);
 	   var rows = LogSourceRowTemplate(logsource);
 	   var table_div = getDetail();
 	   var logtemplate = LogSourceTableTemplate(logsource.name);
@@ -90,6 +91,7 @@ function buildLogChart(id){
 	  
 	   //chart_div.innerHTML = ChartTemplate(logsource.name);
 	   events.forEach(function(entry) {
+		   item = {};
 		    item.time = entry.time;
 		    item.rate = entry.rate;
 		    arr.push(item);

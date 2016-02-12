@@ -36,7 +36,6 @@ function LogSourceRowTemplate(arr){
 		console.log(context);
 		tpl = textile.render(context) + tpl;
 	}
-	console.log(tpl);
 	return tpl;
 
 }
@@ -52,13 +51,13 @@ function SecondDonutTemplate(id, type, name){
 	return tpl;
 }
 
-function ChartTemplate(name){
+function ErrorTemplate(all_error){
 	//gets the html for the page from index.html
 	var template = document.getElementById('template10').innerHTML;
 	var tpl= '';
 	//uses hogan to compile the html
 	textile = Hogan.compile(template);
-	context = { 'name' : name};
+	context = { 'Error' : all_error};
 	tpl = textile.render(context);
 	
 	return tpl;
